@@ -1,0 +1,9 @@
+# all folders starting with .
+.*/
+# all files starting with . except .gitignore
+.*
+!.gitignore
+
+# macOS: XCode
+xcuserdata*/
+DerivedData*/
