@@ -6,4 +6,4 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 project(HelloWorld)
 
-add_executable(${PROJECT_NAME} hello.cpp ReadMe.txt)
+add_executable(${PROJECT_NAME} hello.cpp ../ReadMe.txt)
