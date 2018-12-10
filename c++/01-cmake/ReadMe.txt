@@ -27,8 +27,27 @@ Configurations
             see # https://vcpkg.readthedocs.io/en/latest/users/integration/
             (in "workshop\c++\01-cmake\02-vcpkg")
 
-    - Windows, Visual Studio 15 2017, llvm 8.0.0
-        \wip
+    3. Windows, Visual Studio 15 2017, llvm 8.0.0
+       
+        see https://github.com/arves100/llvm-vs2017-integration
+            dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets"
+                v141
+                v141_clang_c2
+
+            add "LLVM-vs2017"
+
+                replace <ExecutablePath> with:
+                    <was_ExecutablePath>$(LLVMInstallDir)\msbuild-bin;$(ExecutablePath)</was_ExecutablePath>
+                    <CLToolExe>clang-cl.exe</CLToolExe>
+                    <CLToolPath>$(LLVMInstallDir)\bin</CLToolPath>
+                    <LibraryPath>$(LLVMInstallDir)\lib\clang\8.0.0\lib\windows;$(LibraryPath)</LibraryPath>   
+
+        3.1 CMake GUI
+            Generator "Visual Studio 15 2017 Win64"
+            Optional toolset : LLVM-vs2017
+
+            https://stackoverflow.com/questions/50883851/how-to-stop-gm-being-passed-to-clang-cl-exe-from-cmake
+
 
 ##################################################################################################
 \todo
