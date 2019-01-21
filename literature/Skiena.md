@@ -1,16 +1,17 @@
-# My Skiena path
+# The Skiena path
 
 ## 1.7
 
 ### Counterexamples 
 
-1.1 a+b < min(a,b).
-	Negative numbers : -1+-2 < min(-1, -2) <=> -3 < -2 .
+1.1 a+b < min(a,b).    
+    Negative numbers : -1+-2 < min(-1, -2) <=> -3 < -2 .
 
-1.2 a\*b < min(a,b)
+1.2 a\*b < min(a,b).
+    A negative number : -1\*2 < min(-1, 2) <=> -2 < -1 .
 
 # Help
-- GitHub uses its own *md* format, but try to stick to the standard.
+- `GitHub` uses its own *md* format, but try to stick to the standard!
 - use \\ to encode (escape) special characters.
 
 # Reference
