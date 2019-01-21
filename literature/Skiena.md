@@ -15,6 +15,14 @@
 
 1-4. Design/draw a road network with two points a and b such that the shortest route between a and b is not the route with the fewest turns.    
         We take the previous right isosceles triangle, we remove the hypotenuse and we replace it with an arc circle with the center in the middle of the (remove) hypotenuse. The arc circle has no turns, the triangle has one turn, but the shortest route is the triangle's catheti, not the arc circle. Let's prove it: let d1 be the distance by the circle and d2 the one by triangle. `d1 = 2*PI*R/2 = PI*R = PI*(d/2) = (PI/2) * d` . `d2 = 2*d/sqrt(2)= sqrt(2)*d` (see 1-3). `d1 > d2 <=> (PI/2)*d > sqrt(2)*d <=> PI > 2*sqrt(2) <=> PI^2 > 8 <=> 9,86 > 8` . QED.
+
+1-5. The knapsack problem: S = set, T = target.
+    1. Put the elements of S in the knapsack in left to right order if they fit, i.e. the first-fit algorithm.    
+        {3, 2, 2}, T = 4. Result is {3} instead of {2, 2}.
+    2. Put the elements of S in the knapsack from smallest to largest, i.e. the best-fit algorithm.
+        {3, 2, 1}, T = 2. Result is {1} instead of {2}.
+    3. Put the elements of S in the knapsack from largest to smallest.
+        {3, 2, 2}, T = 4. Result is {3} instead of {2, 2}.
  
 # Help
 - `GitHub` uses its own *md* format, but try to stick to the standard!
