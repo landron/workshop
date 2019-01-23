@@ -47,10 +47,7 @@ A winning case seems to be:
 
 It is obvious that `U = S1 + S2` (property 1), so `U = SL + S1 + S2` (property 2). `len(S1) = len(S2) = n/2 < len(SL) = n-2 <=> 4 < n` . For 6 we have: {1, 2, 5, 6}, {1, 2, 3}, {4, 5, 6}.
 
-Thus, the counterexample is   
-
- **{1, 2, 5, 6}**, **{1, 2, 3}**, **{4, 5, 6}**    
-for U = {1 .. 6}.
+Thus, a counterexample is, for U = {1 .. 6} :  **{1, 2, 5, 6}**, **{1, 2, 3}**, **{4, 5, 6}**.
  
 # Help
 - `GitHub` uses its own *md* format, but try to stick to the standard!
