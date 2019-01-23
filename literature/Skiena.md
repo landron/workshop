@@ -4,27 +4,30 @@
 
 ### Counterexamples 
 
-1-1. a+b < min(a,b).    
+1. (1-1). a+b < min(a,b).    
         Negative numbers : -1+-2 < min(-1, -2) <=> -3 < -2 .
 
-1-2. a\*b < min(a,b).    
+2. (1-2). a\*b < min(a,b).    
         A negative number : -1\*2 < min(-1, 2) <=> -2 < -1 .
         
-1-3. Design/draw a road network with two points a and b such that the fastest route between a and b is not the shortest route.    
-        The road network could be a right isosceles triangle with a and b as hypotenuse vertices, but with a limit of speed twice as smaller than the other route (by *legs* or catheti). Let d1 be the distance between a and b and d2 the distance of one leg (so the total distance between a and b using this route is `2*d2`). From the Pythagorean theorem, we have `d1^2 = 2*d2^2` so `d2 = d1/sqrt(2)`. Now, `t2 = 2*d2/v2 = 2*d1/(sqrt(2)*2*v1) = t1/sqrt(2)`. As sqrt(2) > 1, the fastest route is by the longest route, namely the legs of our triangle and not the hypotenuse.
+3. (1-3). Design/draw a road network with two points a and b such that the fastest route between a and b is not the shortest route.     
 
-1-4. Design/draw a road network with two points a and b such that the shortest route between a and b is not the route with the fewest turns.    
-        We take the previous right isosceles triangle, we remove the hypotenuse and we replace it with an arc circle with the center in the middle of the (remove) hypotenuse. The arc circle has no turns, the triangle has one turn, but the shortest route is the triangle's catheti, not the arc circle. Let's prove it: let d1 be the distance by the circle and d2 the one by triangle. `d1 = 2*PI*R/2 = PI*R = PI*(d/2) = (PI/2) * d` . `d2 = 2*d/sqrt(2)= sqrt(2)*d` (see 1-3). `d1 > d2 <=> (PI/2)*d > sqrt(2)*d <=> PI > 2*sqrt(2) <=> PI^2 > 8 <=> 9,86 > 8` . QED.
 
-1-5. The knapsack problem: S = set, T = target.    
-1. Put the elements of S in the knapsack in left to right order if they fit, i.e. the first-fit algorithm.    
+The road network could be a right isosceles triangle with a and b as hypotenuse vertices, but with a limit of speed twice as smaller than the other route (by *legs* or catheti). Let d1 be the distance between a and b and d2 the distance of one leg (so the total distance between a and b using this route is `2*d2`). From the Pythagorean theorem, we have `d1^2 = 2*d2^2` so `d2 = d1/sqrt(2)`. Now, `t2 = 2*d2/v2 = 2*d1/(sqrt(2)*2*v1) = t1/sqrt(2)`. As sqrt(2) > 1, the fastest route is by the longest route, namely the legs of our triangle and not the hypotenuse.
+
+4. (1-4). Design/draw a road network with two points a and b such that the shortest route between a and b is not the route with the fewest turns.    
+
+We take the previous right isosceles triangle, we remove the hypotenuse and we replace it with an arc circle with the center in the middle of the (remove) hypotenuse. The arc circle has no turns, the triangle has one turn, but the shortest route is the triangle's catheti, not the arc circle. Let's prove it: let d1 be the distance by the circle and d2 the one by triangle. `d1 = 2*PI*R/2 = PI*R = PI*(d/2) = (PI/2) * d` . `d2 = 2*d/sqrt(2)= sqrt(2)*d` (see 1-3). `d1 > d2 <=> (PI/2)*d > sqrt(2)*d <=> PI > 2*sqrt(2) <=> PI^2 > 8 <=> 9,86 > 8` . QED.
+
+5. (1-5). The knapsack problem: S = set, T = target.    
+  - Put the elements of S in the knapsack in left to right order if they fit, i.e. the first-fit algorithm.    
         {3, 2, 2}, T = 4. Result is {3} instead of {2, 2}.
-2. Put the elements of S in the knapsack from smallest to largest, i.e. the best-fit algorithm.    
+  - Put the elements of S in the knapsack from smallest to largest, i.e. the best-fit algorithm.    
         {3, 2, 1}, T = 2. Result is {1} instead of {2}.
-3. Put the elements of S in the knapsack from largest to smallest.    
+  - Put the elements of S in the knapsack from largest to smallest.    
         {3, 2, 2}, T = 4. Result is {3} instead of {2, 2}.
 
-1-6. The cover set problem: U = {1, .., n}. Find a counterexample for the following algorithm: Select the largest subset for the cover, and then delete all its elements from the universal set. Repeat by adding the subset containing the largest number of uncovered elements until all are covered.
+6. (1-6). The cover set problem: U = {1, .., n}. Find a counterexample for the following algorithm: Select the largest subset for the cover, and then delete all its elements from the universal set. Repeat by adding the subset containing the largest number of uncovered elements until all are covered.
 
 Naming conventions: SL is the largest set, while S1 ... Sm are the other sets. `len(SL) > len(Sk) for k=1..n`.   
 Algorithm: U = SL + S1 + ... Sm. Let's find a counterexample U = S1 + ... Sm so that adding SL is useless, increasing the number of subsets, thus not the smallest cover set.
@@ -44,7 +47,10 @@ A winning case seems to be:
 
 It is obvious that `U = S1 + S2` (property 1), so `U = SL + S1 + S2` (property 2). `len(S1) = len(S2) = n/2 < len(SL) = n-2 <=> 4 < n` . For 6 we have: {1, 2, 5, 6}, {1, 2, 3}, {4, 5, 6}.
 
-Thus, the counterexample is {1, 2, 5, 6}, {1, 2, 3}, {4, 5, 6} for U = {1 .. 6}.
+Thus, the counterexample is   
+
+ **{1, 2, 5, 6}**, **{1, 2, 3}**, **{4, 5, 6}**    
+for U = {1 .. 6}.
  
 # Help
 - `GitHub` uses its own *md* format, but try to stick to the standard!
