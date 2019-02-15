@@ -9,9 +9,12 @@
     "
 
     copy elision help:
-		see NonMoveable.h
+        see NonMoveable.h
 
-	\todo : multiple configurations with VS Community 2017, 15.9.4
+    \todo : multiple configurations with VS Community 2017, 15.9.4
+
+    Knowledge base
+        * CMake GUI: "Delete cache" after defining VCPKG_ROOT
     ]]
 cmake_minimum_required(VERSION 3.12)
 

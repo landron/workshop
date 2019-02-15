@@ -40,6 +40,11 @@ NonMoveable make()
     return NonMoveable(42);
 }
 
+/*  
+    Visual Studio Community 2017
+    C++ 20:
+        error C2280: 'NonMoveable::NonMoveable(NonMoveable &&)': attempting to reference a deleted function
+*/
 #if 0
 NonMoveable make_2()
 {
