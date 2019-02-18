@@ -2,7 +2,7 @@
 
 ### About Big Bang: the Cosmic Inflation and its enemies
 
-Some insides from the my favorite YouTube channels (**Closer To Truth** and **PBS Space Time**), patched with some ("anonymous" here) answers from physics.stackexchange.com .
+Here are some insides from the my favorite YouTube channels (**Closer To Truth** and **PBS Space Time**), patched with some ("anonymous" here) answers from physics.stackexchange.com .
 
 Going back in time to the Big Bang (BB)? It is possible with general relativity ... to a certain point. There is no precise theory to describe it before some moment, when the Universe was very small, since there are conflicts between general relativity and quantum mechanics (see [PBS Space Time: "Big Bang problems: rewind Universe using general relativity"](https://www.youtube.com/watch?v=JDmKLXVFJzk)).
 The second law of thermodynamics states that entropy always increases, but in the final stage of the Big Bang it was already very high (gravitation apart ?), in an almost perfect thermal equilibrium.
