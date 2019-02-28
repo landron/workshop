@@ -1,3 +1,7 @@
+### 2019.02.26 [Hardest problem to problem](https://www.youtube.com/watch?v=K4dx42YzQCE)
+On my dearest **["The HackerRank Interview Preparation Kit"](https://www.hackerrank.com/interview/interview-preparation-kit)** I struggled with a graph problem, with an easy solution in the end (as always): find the maximal edge cover so that no component contains more than one "forbidden" node. There is blood everywhere: [github link](
+https://github.com/landron/Problems/tree/public-master/hackerrank/algo/Graph%20Theory/isolate_nodes).
+
 ### 2019.01.18 Back to Haskell
 
    ... because one cannot have more SD <sup name="a1">[1](#f1)</sup> fun than this (except for [Roxy Music](https://www.youtube.com/watch?v=kOnde5c7OG8), but not SD <sup name="a1_1">[1](#f1)</sup>).
