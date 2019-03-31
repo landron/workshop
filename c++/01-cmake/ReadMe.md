@@ -58,7 +58,8 @@
 
 
 ### \todo
-    -   http://llvm.org/builds/ : get clang-format
+* clang-format
+* clang-tidy
 
 ### vcpkg
 
