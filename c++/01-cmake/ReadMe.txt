@@ -30,12 +30,18 @@ Configurations
     3. Windows, Visual Studio 15 2017, llvm 8.0.0
        
         see https://github.com/arves100/llvm-vs2017-integration
+            each llvm version has its own branch: 8 is missing as of 2019.03.
+
             dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets"
                 v141
                 v141_clang_c2
 
-            add "LLVM-vs2017"
+            (home: it is F:!)
 
+            add "LLVM-vs2017"
+                with Toolset.props & Toolset.targets copied from Toolset-llvm-vs2017-x64
+
+                Toolset.props:
                 replace <ExecutablePath> with:
                     <was_ExecutablePath>$(LLVMInstallDir)\msbuild-bin;$(ExecutablePath)</was_ExecutablePath>
                     <CLToolExe>clang-cl.exe</CLToolExe>

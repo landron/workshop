@@ -69,7 +69,7 @@ def parse_with(input_func, output_func):
 
 def parse_big_test():
     '''
-        parse the HackerRank input
+        parse some big file HackerRank input
     '''
     fptr = open('input01.txt', 'r')
     with PrettyFileWriter('output01-mine.txt') as fptr_w:
