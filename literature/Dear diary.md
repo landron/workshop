@@ -15,6 +15,6 @@ https://github.com/landron/Problems/tree/public-master/hackerrank/algo/Graph%20T
   This must be the place, this must be my blog!
 
 <a id="f1">1.</a> Software development.  
-<a id="f2">2.</a> https://www.markdownguide.org/cheat-sheet/.   
+<a id="f2">2.</a> https://www.markdownguide.org/cheat-sheet/. (tag_md)     
 <a id="f3">3.</a> Footnotes on Github (oh dear!): "How to add footnotes to GitHub-flavoured Markdown?": [SO answer
 ](https://stackoverflow.com/a/32119820/1032277).
