@@ -54,6 +54,6 @@ Thus, a counterexample is, for U = {1 .. 6} :  **{1, 2, 5, 6}**, **{1, 2, 3}**, 
 - use \\ to encode (escape) special characters.
 
 # Reference
-- Markdown (*md*) quick help: https://guides.github.com/features/mastering-markdown/
+- Markdown (*md*) quick help: https://guides.github.com/features/mastering-markdown/. (tag_md)
 - https://stackoverflow.com/questions/5112057/where-can-i-find-the-solutions-to-the-algorithm-design-manual
 - (the precedent goes to) http://www.algorist.com/algowiki/index.php/The_Algorithms_Design_Manual_(Second_Edition)
