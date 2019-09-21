@@ -1,10 +1,10 @@
 /*
     BigInteger vs int
 */
-#include <iostream>
-
 #include "gtest/gtest.h"
 #include "problems.h"
+
+#include <iostream>
 
 namespace {
 
