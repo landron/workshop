@@ -28,7 +28,7 @@ auto sum_of_divisible_3_5_direct(unsigned limit)
 /*
     O(1)
 */
-auto sum_of_divisible_3_5_smart(unsigned limit) -> BigInteger
+constexpr auto sum_of_divisible_3_5_smart(unsigned limit) -> BigInteger
 {
     if (limit == 0)
         return 0;
@@ -38,10 +38,10 @@ auto sum_of_divisible_3_5_smart(unsigned limit) -> BigInteger
     const auto n5 = static_cast<unsigned>(limit/5);
     const auto n15 = static_cast<unsigned>(limit/15);
 
-    const auto sum_to_n = [](unsigned limit)
+    constexpr auto sum_to_n = [](unsigned limit_in)
     {
-        const auto sum_of = static_cast<BigInteger>(limit)*(limit+1)/2;
-        //sum_of *= static_cast<BigInteger>(factor);
+        const auto limit = static_cast<BigInteger>(limit_in);
+        const auto sum_of = limit*(limit+1)/2;
         return sum_of;
     };
     return 3*sum_to_n(n3) + 5*sum_to_n(n5) - 15*sum_to_n(n15);
@@ -60,6 +60,7 @@ TEST(test_p01, main)
     ASSERT_TRUE(0 == sum_of_divisible_3_5_smart(2));
     ASSERT_TRUE(3 == sum_of_divisible_3_5_direct(5));
     ASSERT_TRUE(3 == sum_of_divisible_3_5_smart(5));
+    static_assert(14 == sum_of_divisible_3_5_smart(7));
 
     for (unsigned i = 0; i < 150; ++i) {
         //std::cout << i << ": " << sum_of_divisible_3_5_direct(i) << ", " << sum_of_divisible_3_5_smart(i) << "\n";
