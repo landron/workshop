@@ -14,6 +14,9 @@
         * clang-format
 
     Knowledge base
+        * fast command line build with Ninja:
+            see https://github.com/landron/workshop/tree/master/c%2B%2B/01-cmake,
+                    4.Windows, Visual Studio 15 2017, Ninja
         * CMake GUI: "Delete cache" after defining VCPKG_ROOT
             (set DOS command)
         * update vcpkg: git pull, bootstrap-vcpkg.bat
@@ -36,6 +39,6 @@ project(modern-cpp-challenge)
 
 find_package(GTest MODULE REQUIRED)
 
-add_executable(${PROJECT_NAME} main.cpp problems.h p01.cpp p02.cpp)
+add_executable(${PROJECT_NAME} main.cpp problems.h p01.cpp p0203.cpp)
 # it also adds include path
 target_link_libraries(${PROJECT_NAME} PRIVATE GTest::GTest GTest::Main)

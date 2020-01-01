@@ -31,7 +31,7 @@ static
 /*constexpr*/ unsigned get_least_common_multiple(const std::vector<unsigned>& v)
 {
     assert(!v.empty());
-    
+
     unsigned lcm = 1;
     for (auto i : v)
         lcm = get_least_common_multiple(lcm, i);
