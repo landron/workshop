@@ -8,10 +8,16 @@
         add_test(AllTestsInMain main)
     "
 
-    \todo : multiple configurations with VS Community 2017, 15.9.4
+    \todo :
+        * multiple configurations with VS Community 2017, 15.9.x
+            (meaning? using clang ?)
+        * clang-format
 
     Knowledge base
         * CMake GUI: "Delete cache" after defining VCPKG_ROOT
+            (set DOS command)
+        * update vcpkg: git pull, bootstrap-vcpkg.bat
+        * update packages: see vcpkg parameters
     ]]
 cmake_minimum_required(VERSION 3.12)
 
