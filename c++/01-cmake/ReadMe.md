@@ -30,7 +30,7 @@
         (in "workshop\c++\01-cmake\02-vcpkg")
 
 3. Windows, Visual Studio 15 2017, llvm 8.0.0
-   
+
     see https://github.com/arves100/llvm-vs2017-integration
         each llvm version has its own branch: 8 is missing as of 2019.03.
 
@@ -47,17 +47,29 @@
 
     Toolset.props:
         replace <ExecutablePath> with:
-            
+
        <was_ExecutablePath>$(LLVMInstallDir)\msbuild-bin;$(ExecutablePath)</was_ExecutablePath>
        <CLToolExe>clang-cl.exe</CLToolExe>
        <CLToolPath>$(LLVMInstallDir)\bin</CLToolPath>
-       <LibraryPath>$(LLVMInstallDir)\lib\clang\8.0.0\lib\windows;$(LibraryPath)</LibraryPath>   
+       <LibraryPath>$(LLVMInstallDir)\lib\clang\8.0.0\lib\windows;$(LibraryPath)</LibraryPath>
 
     3.1 CMake GUI
         Generator "Visual Studio 15 2017 Win64"
         Optional toolset : LLVM-vs2017
 
       see https://stackoverflow.com/questions/50883851/how-to-stop-gm-being-passed-to-clang-cl-exe-from-cmake
+
+4. Windows, Visual Studio 15 2017, Ninja = command line fast build
+    - install ninja
+    - find VsDevCmd.bat (-help): "\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\vsdevcmd"
+    - in normal Command prompt: VsDevCmd.bat -arch=amd64
+        (VS x64 build environment and x64 binaries)
+    - go to the build folder (CMake likes to build where called)
+    - cmake -G Ninja <CMakeLists.txt folder>
+    - ninja to build
+
+    4.1 Windows, llvm 8.0.0, Ninja
+    cmake -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_LINKER=llvm-ld <CMakeLists.txt folder>
 
 ### Known issues
 * "clang-cl : warning : argument unused during compilation: '/Gm-' [-Wunused-command-line-argument]"
