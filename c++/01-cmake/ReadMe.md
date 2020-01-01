@@ -14,16 +14,13 @@
 
 ## Configurations
 1. Windows, MS Visual Studio Community 2017
-
     (needs Microsoft account)
-
     tested : 15.9.3
 
     How: just "Open in Visual Studio" from Explorer
     (CMake GUI should also work)
 
 2. Windows, Visual Studio 15 2017, vcpkg
-
     2.1 CMake GUI 3.13.0
         Generator "Visual Studio 15 2017 Win64"
         "Specify toolchain file for cross-compiling" : vcpkg/scripts/buildsystems/vcpkg.cmake
