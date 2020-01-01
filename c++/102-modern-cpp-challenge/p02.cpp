@@ -1,10 +1,13 @@
 /*
-    2. Greatest common divisor  p.46/428
+    2. Greatest common divisor                  p.46/428
+    3. Least common multiple (of more numbers)  p.47/428
 
-    !!! constexpr
+    Learnt: constexpr, std::accumulate
 */
 #include "gtest/gtest.h"
 #include "problems.h"
+
+#include <numeric>
 
 static
 constexpr unsigned get_greatest_common_divisor(unsigned a, unsigned b)
@@ -17,9 +20,43 @@ constexpr unsigned get_greatest_common_divisor(unsigned a, unsigned b)
     return b;
 }
 
+static
+constexpr unsigned get_least_common_multiple(unsigned a, unsigned b)
+{
+    const auto gcd = get_greatest_common_divisor(a, b);
+    return a*b / gcd;
+}
+
+static
+/*constexpr*/ unsigned get_least_common_multiple(const std::vector<unsigned>& v)
+{
+    assert(!v.empty());
+    
+    unsigned lcm = 1;
+    for (auto i : v)
+        lcm = get_least_common_multiple(lcm, i);
+    return lcm;
+}
+
+//constexpr  //constexpr must be inline
 unsigned modern_cpp_challenge::get_greatest_common_divisor(unsigned a, unsigned b)
 {
     return ::get_greatest_common_divisor(a, b);
+}
+
+/*
+    the correct (preferred)  solution: use accumulate
+*/
+unsigned modern_cpp_challenge::get_least_common_multiple(const std::vector<unsigned>& v)
+{
+    const auto first = v.begin();
+    const auto last = v.end();
+
+    //  ambiguity problem
+    //return std::accumulate(first, last, 1, ::get_least_common_multiple);
+    return std::accumulate(first, last, 1, [](unsigned a, unsigned b) {
+      return ::get_least_common_multiple(a, b);
+    });
 }
 
 TEST(test_p02, main)
@@ -34,4 +71,19 @@ TEST(test_p02, main)
 
     static_assert(6 == get_greatest_common_divisor(48, 54));
     static_assert(18 == get_greatest_common_divisor(108, 90));
+}
+
+TEST(test_p03, main)
+{
+    static_assert(144 == get_least_common_multiple(48, 36));
+    static_assert(6*56 == get_least_common_multiple(48, 56));
+    static_assert(7*144 == get_least_common_multiple(144, 56));
+
+    ASSERT_TRUE(7 * 144 == get_least_common_multiple({12, 56, 36, 48}));
+    ASSERT_TRUE(24 == get_least_common_multiple({1, 2, 8, 3}));
+    ASSERT_TRUE(252 == get_least_common_multiple({2, 7, 3, 9, 4}));
+
+    ASSERT_TRUE(7 * 144 == modern_cpp_challenge::get_least_common_multiple({12, 56, 36, 48}));
+    ASSERT_TRUE(24 == modern_cpp_challenge::get_least_common_multiple({1, 2, 8, 3}));
+    ASSERT_TRUE(252 == modern_cpp_challenge::get_least_common_multiple({2, 7, 3, 9, 4}));
 }
