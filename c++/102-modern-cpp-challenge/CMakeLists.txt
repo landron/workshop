@@ -17,6 +17,9 @@
         * fast command line build with Ninja:
             see https://github.com/landron/workshop/tree/master/c%2B%2B/01-cmake,
                     4.Windows, Visual Studio 15 2017, Ninja
+            modern-cpp-challenge.exe --gtest_list_tests
+            modern-cpp-challenge.exe --gtest_filter=test_p03*
+
         * CMake GUI: "Delete cache" after defining VCPKG_ROOT
             (set DOS command)
         * update vcpkg: git pull, bootstrap-vcpkg.bat
@@ -24,12 +27,26 @@
     ]]
 cmake_minimum_required(VERSION 3.12)
 
+#
+#   vcpkg
+#
 # https://vcpkg.readthedocs.io/en/latest/users/integration/
 if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")
     message(STATUS "VCPKG_ROOT=${VCPKG_ROOT}")
     set(CMAKE_TOOLCHAIN_FILE "${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE FILEPATH "")
 endif()
+
+#
+#   build type: -DCMAKE_BUILD_TYPE=Release/Debug/RelWithDebInfo/MinSizeRel
+#       see CMakeCache.txt
+#
+message(CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE})
+#message(CMAKE_CONFIGURATION_TYPES=${CMAKE_CONFIGURATION_TYPES})
+
+#
+#   The project
+#
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -39,6 +56,6 @@ project(modern-cpp-challenge)
 
 find_package(GTest MODULE REQUIRED)
 
-add_executable(${PROJECT_NAME} main.cpp problems.h p01.cpp p0203.cpp)
+add_executable(${PROJECT_NAME} main.cpp problems.h p001.cpp p002003.cpp)
 # it also adds include path
 target_link_libraries(${PROJECT_NAME} PRIVATE GTest::GTest GTest::Main)

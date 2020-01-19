@@ -7,7 +7,7 @@ auto DO_EXECUTE = false;
 
 using namespace modern_cpp_challenge;
 
-TEST(test_main, all_problems)
+TEST(test_main, almost_all_problems)
 {
     if (DO_EXECUTE)
     {
