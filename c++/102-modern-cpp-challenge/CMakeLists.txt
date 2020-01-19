@@ -56,6 +56,6 @@ project(modern-cpp-challenge)
 
 find_package(GTest MODULE REQUIRED)
 
-add_executable(${PROJECT_NAME} main.cpp problems.h p001.cpp p002003.cpp)
+add_executable(${PROJECT_NAME} main.cpp problems.h p001.cpp p002003.cpp p004.cpp)
 # it also adds include path
 target_link_libraries(${PROJECT_NAME} PRIVATE GTest::GTest GTest::Main)
