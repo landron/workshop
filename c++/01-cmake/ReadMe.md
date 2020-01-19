@@ -78,8 +78,8 @@ How to set a cross-compiler cross-platform C++ environment with cmake and vcpkg
 
 ### Knowledge base
 * clean : just delete the build folder
-* -DCMAKE_BUILD_TYPE=Release
-    see CMakeCache.txt for build types
+* -DCMAKE_BUILD_TYPE=Release <br/>
+   see CMakeCache.txt for build types
 
 ### \todo
 * clang-format
