@@ -1,5 +1,6 @@
 
-# How to set a cross-compiler cross-platform C++ environment with cmake and vcpkg
+# C++ cmake vcpkg 
+How to set a cross-compiler cross-platform C++ environment with cmake and vcpkg
 
 ## Purpose
    basic cpp project
@@ -13,24 +14,23 @@
 * llvm + clang : http://llvm.org/builds/
 
 ## Configurations
-1. Windows, MS Visual Studio Community 2017
-    (needs Microsoft account)
+1. Windows, MS Visual Studio Community 2017 <br/>
+    (needs Microsoft account) <br/>
     tested : 15.9.3
 
     How: just "Open in Visual Studio" from Explorer
     (CMake GUI should also work)
 
-2. Windows, Visual Studio 15 2017, vcpkg
-    2.1 CMake GUI 3.13.0
-        Generator "Visual Studio 15 2017 Win64"
+2. Windows, Visual Studio 15 2017, vcpkg <br/>
+    2.1 CMake GUI 3.13.0 + 
+        Generator "Visual Studio 15 2017 Win64" <br/>
         "Specify toolchain file for cross-compiling" : vcpkg/scripts/buildsystems/vcpkg.cmake
 
     2.2 "Open in Visual Studio" from Explorer (VS's cmake)
         see # https://vcpkg.readthedocs.io/en/latest/users/integration/
         (in "workshop\c++\01-cmake\02-vcpkg")
 
-3. Windows, Visual Studio 15 2017, llvm 8.0.0
-
+3. Windows, Visual Studio 15 2017, llvm 8.0.0 <br/>
     see https://github.com/arves100/llvm-vs2017-integration
         each llvm version has its own branch: 8 is missing as of 2019.03.
 
@@ -39,6 +39,7 @@
             v141_clang_c2
 
     or
+    
         dir "F:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets"
             LLVM-vs2017
             v141
