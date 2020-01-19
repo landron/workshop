@@ -75,6 +75,11 @@
 * "clang-cl : warning : argument unused during compilation: '/Gm-' [-Wunused-command-line-argument]"
     clang + VS, see https://stackoverflow.com/questions/50883851/how-to-stop-gm-being-passed-to-clang-cl-exe-from-cmake
 
+### Knowledge base
+* clean : just delete the build folder
+* -DCMAKE_BUILD_TYPE=Release
+    see CMakeCache.txt for build types
+
 ### \todo
 * clang-format
 * clang-tidy
