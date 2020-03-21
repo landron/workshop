@@ -1,5 +1,7 @@
 /*
-    Largest prime smaller than a given number
+    P4: Largest prime smaller than a given number
+    P5: sexy prime pairs up to a limit
+        "Sexy primes are prime numbers that differ from each other by 6.""
 */
 #include "gtest/gtest.h"
 #include "problems.h"
@@ -57,6 +59,21 @@ BigInteger largest_prime_smaller_than(BigInteger number)
     return number;
 }
 
+size_t sexy_primes_pairs(BigInteger limit, bool print_them = false)
+{
+    size_t count = 0;
+    for (BigInteger i = 5; i < limit-6; ++i)
+    {
+        if (is_prime(i) && is_prime(i+6))
+        {
+            ++ count;
+            if (print_them)
+                std::cout << count << ": " << i << " " << i+6 << std::endl;
+        }
+    }
+    return count;
+}
+
 };
 
 
@@ -80,4 +97,15 @@ TEST(test_p04, main)
     ASSERT_TRUE(2 == largest_prime_smaller_than(3));
     ASSERT_TRUE(73 == largest_prime_smaller_than(79));
     ASSERT_TRUE(997 == largest_prime_smaller_than(1000));
+}
+
+TEST(test_p05, main)
+{
+    assert(0 == sexy_primes_pairs(11));
+    assert(1 == sexy_primes_pairs(12));
+    assert(2 == sexy_primes_pairs(14));
+    assert(4 == sexy_primes_pairs(20));
+
+    if (0)
+    std::cout << "Found " << sexy_primes_pairs(102, true) << " sexy prime pairs." << std::endl;
 }
