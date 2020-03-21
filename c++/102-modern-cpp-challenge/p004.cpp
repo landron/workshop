@@ -52,12 +52,8 @@ BigInteger largest_prime_smaller_than(BigInteger number)
     if (number <= 2)
         throw std::exception("Number outside the range: too small!");
 
-    while (1)
-    {
-        --number;
-        if (is_prime(number))
-            break;
-    }
+    --number;
+    for (;!is_prime(number); --number);
     return number;
 }
 
