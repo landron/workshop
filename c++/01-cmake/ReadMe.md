@@ -90,12 +90,12 @@ How to set a cross-compiler cross-platform C++ environment with cmake and vcpkg
 https://github.com/Microsoft/vcpkg/blob/master/docs/examples/installing-and-using-packages.md
 
 ## Troubleshooting
- * "Could not find compiler set in environment variable RC: CMAKE_RC_COMPILER-NOTFOUND."
-  Windows cmake error: be sure to run vcvarsall.bat
+ * "Could not find compiler set in environment variable RC: CMAKE_RC_COMPILER-NOTFOUND." <br/>
+  Windows cmake error: be sure to run vcvarsall.bat <br/>
     It is enough to run "Developer Command Prompt for VS 2017"
- * VS 2017, build, external vcpkg library not found
-  Without "vcpkg integrate install", explicit paths are needed:
-      target_include_directories(${PROJECT_NAME} PRIVATE ${SQLite3_INCLUDE_DIR})
+ * VS 2017, build, external vcpkg library not found <br/>
+  Without "vcpkg integrate install", explicit paths are needed: <br/>
+      target_include_directories(${PROJECT_NAME} PRIVATE ${SQLite3_INCLUDE_DIR}) <br/>
       target_link_libraries(${PROJECT_NAME} ${SQLite3_LIBRARY})
 
 ## Reference
