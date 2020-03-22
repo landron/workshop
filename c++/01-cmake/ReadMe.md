@@ -94,8 +94,8 @@ https://github.com/Microsoft/vcpkg/blob/master/docs/examples/installing-and-usin
   Windows cmake error: be sure to run **vcvarsall.bat** (It is enough to run "Developer Command Prompt for VS 2017")
  * VS 2017, build, external vcpkg library not found <br/>
   Without "vcpkg integrate install", explicit paths are needed:
-  * target_include_directories(${PROJECT_NAME} PRIVATE ${SQLite3_INCLUDE_DIR}) <br/>
-  * target_link_libraries(${PROJECT_NAME} ${SQLite3_LIBRARY})
+    * target_include_directories(${PROJECT_NAME} PRIVATE ${SQLite3_INCLUDE_DIR}) <br/>
+    * target_link_libraries(${PROJECT_NAME} ${SQLite3_LIBRARY})
 
 ## Reference
 * https://llvm.org/docs/GettingStartedVS.html
