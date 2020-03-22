@@ -21,9 +21,12 @@ project(hello-vcpkg)
     see https://github.com/Microsoft/vcpkg/blob/master/docs/examples/installing-and-using-packages.md
 
     vcpkg install sqlite3 --triplet x64-windows
-    ]]
-find_package(Sqlite3 REQUIRED)
 
-add_executable(${PROJECT_NAME} hello.cpp ../ReadMe.txt)
-# it also adds include path
-target_link_libraries(${PROJECT_NAME} sqlite3)
+     Without user-wide integration ("vcpkg integrate install"), full paths are needed:
+     	SQLite3_INCLUDE_DIR, SQLite3_LIBRARY (instead of saying just sqlite3)
+    ]]
+find_package(sqlite3 REQUIRED)
+
+add_executable(${PROJECT_NAME} hello.cpp ../ReadMe.md)
+target_include_directories(${PROJECT_NAME} PRIVATE ${SQLite3_INCLUDE_DIR})
+target_link_libraries(${PROJECT_NAME} ${SQLite3_LIBRARY})
