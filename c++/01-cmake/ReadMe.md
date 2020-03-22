@@ -1,5 +1,5 @@
 
-# C++ cmake vcpkg 
+# C++ cmake vcpkg
 How to set a cross-compiler cross-platform C++ environment with cmake and vcpkg
 
 ## Purpose
@@ -22,7 +22,7 @@ How to set a cross-compiler cross-platform C++ environment with cmake and vcpkg
     (CMake GUI should also work)
 
 2. Windows, Visual Studio 15 2017, vcpkg <br/>
-    2.1 CMake GUI 3.13.0 + 
+    2.1 CMake GUI 3.13.0 +
         Generator "Visual Studio 15 2017 Win64" <br/>
         "Specify toolchain file for cross-compiling" : vcpkg/scripts/buildsystems/vcpkg.cmake
 
@@ -39,7 +39,7 @@ How to set a cross-compiler cross-platform C++ environment with cmake and vcpkg
             v141_clang_c2
 
     or
-    
+
         dir "F:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets"
             LLVM-vs2017
             v141
@@ -88,6 +88,15 @@ How to set a cross-compiler cross-platform C++ environment with cmake and vcpkg
 ### vcpkg
 - sqlite3 choosed for samples
 https://github.com/Microsoft/vcpkg/blob/master/docs/examples/installing-and-using-packages.md
+
+## Troubleshooting
+ * "Could not find compiler set in environment variable RC: CMAKE_RC_COMPILER-NOTFOUND."
+  Windows cmake error: be sure to run vcvarsall.bat
+    It is enough to run "Developer Command Prompt for VS 2017"
+ * VS 2017, build, external vcpkg library not found
+  Without "vcpkg integrate install", explicit paths are needed:
+      target_include_directories(${PROJECT_NAME} PRIVATE ${SQLite3_INCLUDE_DIR})
+      target_link_libraries(${PROJECT_NAME} ${SQLite3_LIBRARY})
 
 ## Reference
 * https://llvm.org/docs/GettingStartedVS.html
