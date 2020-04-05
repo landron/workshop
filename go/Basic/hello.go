@@ -28,6 +28,6 @@ func main() {
 	fmt.Println("The time is", time.Now())
 	fmt.Println(1+rand.Intn(100), "is a random number.")
 
-    python := "awesome!"  // not a const
-    fmt.Println("How is python?", python)
+	python := "awesome!" // not a const
+	fmt.Println("How is python?", python)
 }
