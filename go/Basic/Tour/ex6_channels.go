@@ -4,7 +4,7 @@
 */
 package main
 
-//	fmt wants alphabetical order
+//	"go fmt" wants alphabetical order
 import (
 	"fmt"
 	"golang.org/x/tour/tree"
