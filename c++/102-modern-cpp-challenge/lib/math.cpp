@@ -76,6 +76,8 @@ Divisors math_lib::get_prime_divisors(unsigned number, const Primes& primes)
         if (number == 1)
             break;
     }
+    if (divisors.empty())
+        divisors.push_back(std::make_pair(number, 1));
 
     return divisors;
 }
@@ -83,6 +85,10 @@ Divisors math_lib::get_prime_divisors(unsigned number, const Primes& primes)
 /*
     tag_recursive_lambda
     #recursive_lambda
+        https://stackoverflow.com/questions/2067988/recursive-lambda-functions-in-c11
+
+    TODO: is set really needed here ? I do not think is possible to find the same number
+        multiple times
 */
 ProperDivisors math_lib::get_proper_divisors(const Divisors& prime_divisors)
 {
@@ -154,7 +160,7 @@ TEST(math, get_prime_divisors)
 
     const auto primes_1000 = get_primes(1000);
     ASSERT_EQ((Divisors{{2u,2u}}), get_prime_divisors(4, primes_1000));
-    ASSERT_EQ((Divisors()), get_prime_divisors(5, primes_1000));
+    ASSERT_EQ((Divisors{{5u, 1u}}), get_prime_divisors(5, primes_1000));
     ASSERT_EQ((Divisors{{2u,1u}, {3u,1u}}), get_prime_divisors(6, primes_1000));
     ASSERT_EQ((Divisors{{2u,3u}}), get_prime_divisors(8, primes_1000));
     ASSERT_EQ((Divisors{{2u,3u}, {7u,1u}}), get_prime_divisors(56, primes_1000));
@@ -170,6 +176,7 @@ TEST(math, get_proper_divisors)
     using Divs = Primes;
 
     const auto primes_1000 = get_primes(1000);
+    ASSERT_EQ(Divs({1}), get_proper_divisors(get_prime_divisors(2, primes_1000)));
     ASSERT_EQ(Divs({1, 2, 3}), get_proper_divisors(get_prime_divisors(6, primes_1000)));
     ASSERT_EQ(Divs({1, 2, 4}), get_proper_divisors(get_prime_divisors(8, primes_1000)));
     ASSERT_EQ(Divs({1, 2, 3, 4, 6}), get_proper_divisors(get_prime_divisors(12, primes_1000)));

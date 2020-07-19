@@ -57,7 +57,7 @@ project(modern-cpp-challenge)
 find_package(GTest MODULE REQUIRED)
 
 set(sources main.cpp problems.h lib/math.h lib/math.cpp lib/utils.h lib/utils.cpp)
-set(sources ${sources} p001.cpp p002003.cpp p004005.cpp)
+set(sources ${sources} p001.cpp p002003.cpp p004005.cpp p006.cpp)
 add_executable(${PROJECT_NAME} ${sources})
 # it also adds include path
 target_link_libraries(${PROJECT_NAME} PRIVATE GTest::GTest GTest::Main)
