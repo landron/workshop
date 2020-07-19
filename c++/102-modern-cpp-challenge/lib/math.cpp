@@ -6,9 +6,6 @@
 
 #include "utils.h"
 
-using Primes = std::vector<unsigned>;
-using Divisors = std::vector<std::pair<unsigned, unsigned>>;
-
 /*
     Reference
         proj_euler.py/get_primes_2
@@ -16,7 +13,7 @@ using Divisors = std::vector<std::pair<unsigned, unsigned>>;
     Return value
         no cost: the vector will be just moved
 */
-Primes get_primes(unsigned limit)
+math_lib::Primes math_lib::get_primes(unsigned limit)
 {
     if (limit < 3)
         return {};
@@ -47,7 +44,7 @@ Primes get_primes(unsigned limit)
     Reference
         proj_euler.py/get_prime_divisors
 */
-std::vector<std::pair<unsigned, unsigned>> get_proper_divisors(unsigned number, const Primes& primes)
+math_lib::Divisors math_lib::get_prime_divisors(unsigned number, const math_lib::Primes& primes)
 {
     const auto get_power = [](auto& number, auto divisor)
     {
@@ -81,6 +78,8 @@ std::vector<std::pair<unsigned, unsigned>> get_proper_divisors(unsigned number, 
 
 TEST(math, get_primes)
 {
+    using namespace math_lib;
+
     ASSERT_EQ(Primes({}), get_primes(2));
     ASSERT_EQ(Primes({2, 3}), get_primes(5));
     ASSERT_EQ(Primes({2, 3, 5, 7}), get_primes(10));
@@ -90,16 +89,18 @@ TEST(math, get_primes)
     std::cout << "get_primes(5) " << get_primes(100).size() << "." << std::endl;
 }
 
-TEST(math, get_proper_divisors)
+TEST(math, get_prime_divisors)
 {
-    const auto primes_1000 = get_primes(1000);
-    ASSERT_EQ((Divisors{{2u,2u}}), get_proper_divisors(4, primes_1000));
-    ASSERT_EQ((Divisors()), get_proper_divisors(5, primes_1000));
-    ASSERT_EQ((Divisors{{2u,1u}, {3u,1u}}), get_proper_divisors(6, primes_1000));
-    ASSERT_EQ((Divisors{{2u,3u}}), get_proper_divisors(8, primes_1000));
-    ASSERT_EQ((Divisors{{2u,3u}, {7u,1u}}), get_proper_divisors(56, primes_1000));
-    ASSERT_EQ((Divisors{{2u,3u}, {3u,2u}}), get_proper_divisors(72, primes_1000));
+    using namespace math_lib;
 
-/*    std::cout << "get_proper_divisors(100) "
-              << to_string(get_proper_divisors(100, primes_1000)) << "." << std::endl;*/
+    const auto primes_1000 = get_primes(1000);
+    ASSERT_EQ((Divisors{{2u,2u}}), get_prime_divisors(4, primes_1000));
+    ASSERT_EQ((Divisors()), get_prime_divisors(5, primes_1000));
+    ASSERT_EQ((Divisors{{2u,1u}, {3u,1u}}), get_prime_divisors(6, primes_1000));
+    ASSERT_EQ((Divisors{{2u,3u}}), get_prime_divisors(8, primes_1000));
+    ASSERT_EQ((Divisors{{2u,3u}, {7u,1u}}), get_prime_divisors(56, primes_1000));
+    ASSERT_EQ((Divisors{{2u,3u}, {3u,2u}}), get_prime_divisors(72, primes_1000));
+
+/*    std::cout << "get_prime_divisors(100) "
+              << to_string(get_prime_divisors(100, primes_1000)) << "." << std::endl;*/
 }

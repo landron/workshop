@@ -3,5 +3,12 @@
 #include <utility>
 #include <vector>
 
-std::vector<unsigned> get_primes(unsigned);
-std::vector<std::pair<unsigned, unsigned>> get_proper_divisors(unsigned, const std::vector<unsigned>& primes);
+namespace math_lib
+{
+
+using Primes = std::vector<unsigned>;
+using Divisors = std::vector<std::pair<unsigned, unsigned>>;
+
+Primes get_primes(unsigned);
+Divisors get_prime_divisors(unsigned, const Primes& primes);
+}
