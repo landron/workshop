@@ -61,3 +61,11 @@ set(sources ${sources} p001.cpp p002003.cpp p004005.cpp)
 add_executable(${PROJECT_NAME} ${sources})
 # it also adds include path
 target_link_libraries(${PROJECT_NAME} PRIVATE GTest::GTest GTest::Main)
+
+# TODO: cl : Command line warning D9025 : overriding '/W3' with '/W4'
+#[[
+target_compile_options(${PROJECT_NAME} PRIVATE
+  $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+  $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -pedantic -Werror>
+)
+]]

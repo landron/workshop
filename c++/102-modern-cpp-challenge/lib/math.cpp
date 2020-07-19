@@ -7,6 +7,7 @@
 #include "utils.h"
 
 using Primes = std::vector<unsigned>;
+using Divisors = std::vector<std::pair<unsigned, unsigned>>;
 
 /*
     Reference
@@ -29,7 +30,7 @@ Primes get_primes(unsigned limit)
     auto& sieve = sieve_of_Eratosthenes;
 
     const auto limit_of_sieve = 1 + std::floor(std::sqrt(limit));
-    for (auto i = 3; i < limit_of_sieve; i += 2)
+    for (size_t i = 3; i < limit_of_sieve; i += 2)
         if (sieve[i/2-1])
             for (size_t j = i*i; j < limit; j += 2*i)
                 sieve[j/2-1] = 0;
@@ -42,10 +43,40 @@ Primes get_primes(unsigned limit)
     return primes;
 }
 
-std::vector<std::pair<unsigned, unsigned>> get_prime_divisors(unsigned, const Primes&)
+/*
+    Reference
+        proj_euler.py/get_prime_divisors
+*/
+std::vector<std::pair<unsigned, unsigned>> get_proper_divisors(unsigned number, const Primes& primes)
 {
-    using Divisors = std::vector<std::pair<unsigned, unsigned>>;
-    return Divisors();
+    const auto get_power = [](auto& number, auto divisor)
+    {
+        using NumberType = std::remove_reference<decltype(number)>::type;
+
+        assert(number % divisor == 0);
+        NumberType power{};
+        while (number % divisor == 0)
+        {
+            power += 1;
+            number /= divisor;
+        }
+        return power;
+    };
+
+    Divisors divisors;
+    const auto limit = 1 + std::floor(std::sqrt(number));
+    for (auto i : primes)
+    {
+        if (limit < i)
+            break;
+        if (number % i)
+            continue;
+        divisors.push_back(std::make_pair(i, get_power(number, i)));
+        if (number == 1)
+            break;
+    }
+
+    return divisors;
 }
 
 TEST(math, get_primes)
@@ -57,4 +88,18 @@ TEST(math, get_primes)
 
     if (0)
     std::cout << "get_primes(5) " << get_primes(100).size() << "." << std::endl;
+}
+
+TEST(math, get_proper_divisors)
+{
+    const auto primes_1000 = get_primes(1000);
+    ASSERT_EQ((Divisors{{2u,2u}}), get_proper_divisors(4, primes_1000));
+    ASSERT_EQ((Divisors()), get_proper_divisors(5, primes_1000));
+    ASSERT_EQ((Divisors{{2u,1u}, {3u,1u}}), get_proper_divisors(6, primes_1000));
+    ASSERT_EQ((Divisors{{2u,3u}}), get_proper_divisors(8, primes_1000));
+    ASSERT_EQ((Divisors{{2u,3u}, {7u,1u}}), get_proper_divisors(56, primes_1000));
+    ASSERT_EQ((Divisors{{2u,3u}, {3u,2u}}), get_proper_divisors(72, primes_1000));
+
+/*    std::cout << "get_proper_divisors(100) "
+              << to_string(get_proper_divisors(100, primes_1000)) << "." << std::endl;*/
 }

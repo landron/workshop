@@ -4,4 +4,4 @@
 #include <vector>
 
 std::vector<unsigned> get_primes(unsigned);
-std::vector<std::pair<unsigned, unsigned>> get_prime_divisors(unsigned, const std::vector<unsigned>& primes);
+std::vector<std::pair<unsigned, unsigned>> get_proper_divisors(unsigned, const std::vector<unsigned>& primes);
