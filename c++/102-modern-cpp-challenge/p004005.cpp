@@ -3,7 +3,7 @@
     P5: sexy prime pairs up to a limit
         "Sexy primes are prime numbers that differ from each other by 6.""
 */
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 #include "problems.h"
 
 #include <cassert>
