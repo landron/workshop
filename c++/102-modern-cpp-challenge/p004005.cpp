@@ -93,18 +93,18 @@ TEST(test_p04, main)
     ASSERT_TRUE(is_prime(113));
     ASSERT_TRUE(is_prime(127));
 
-    // ASSERT_TRUE(0 == largest_prime_smaller_than(2)); //  C++ exception
-    ASSERT_TRUE(2 == largest_prime_smaller_than(3));
-    ASSERT_TRUE(73 == largest_prime_smaller_than(79));
-    ASSERT_TRUE(997 == largest_prime_smaller_than(1000));
+    // ASSERT_EQ(0, largest_prime_smaller_than(2)); //  C++ exception
+    ASSERT_EQ(2, largest_prime_smaller_than(3));
+    ASSERT_EQ(73, largest_prime_smaller_than(79));
+    ASSERT_EQ(997, largest_prime_smaller_than(1000));
 }
 
 TEST(test_p05, main)
 {
-    assert(0 == sexy_primes_pairs(11));
-    assert(1 == sexy_primes_pairs(12));
-    assert(2 == sexy_primes_pairs(14));
-    assert(4 == sexy_primes_pairs(20));
+    ASSERT_EQ(0, sexy_primes_pairs(11));
+    ASSERT_EQ(1, sexy_primes_pairs(12));
+    ASSERT_EQ(2, sexy_primes_pairs(14));
+    ASSERT_EQ(4, sexy_primes_pairs(20));
 
     if (0)
     std::cout << "Found " << sexy_primes_pairs(102, true) << " sexy prime pairs." << std::endl;
