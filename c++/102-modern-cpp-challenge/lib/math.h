@@ -12,5 +12,7 @@ using ProperDivisors = Primes;
 
 Primes get_primes(unsigned);
 Divisors get_prime_divisors(unsigned, const Primes& primes);
+
+// This is still slow
 ProperDivisors get_proper_divisors(const Divisors& prime_divisors);
 }

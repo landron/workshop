@@ -1,12 +1,12 @@
 #include "math.h"
 
+#include "utils.h"
+
 #include <gtest/gtest.h>
 #include <cassert>
 #include <cmath>
-
-#include "utils.h"
-
 #include <set>
+#include <vector>
 
 using namespace math_lib;
 
@@ -65,7 +65,7 @@ Divisors math_lib::get_prime_divisors(unsigned number, const Primes& primes)
     };
 
     Divisors divisors;
-    const auto limit = 1 + std::floor(std::sqrt(number));
+    const auto limit = 1 + static_cast<unsigned>(std::floor(std::sqrt(number)));
     for (auto i : primes)
     {
         if (limit < i)
@@ -76,13 +76,18 @@ Divisors math_lib::get_prime_divisors(unsigned number, const Primes& primes)
         if (number == 1)
             break;
     }
-    if (divisors.empty())
+    if (number != 1)
         divisors.push_back(std::make_pair(number, 1));
 
     return divisors;
 }
 
 /*
+    Purpose
+        this is slow, see print_amicable_numbers_advanced
+            performance: math_performance.get_proper_divisors_recursively
+        get_proper_divisors_iteratively is better, but not enough
+
     tag_recursive_lambda
     #recursive_lambda
         https://stackoverflow.com/questions/2067988/recursive-lambda-functions-in-c11
@@ -90,10 +95,11 @@ Divisors math_lib::get_prime_divisors(unsigned number, const Primes& primes)
     TODO: is set really needed here ? I do not think is possible to find the same number
         multiple times
 */
-ProperDivisors math_lib::get_proper_divisors(const Divisors& prime_divisors)
+static
+ProperDivisors get_proper_divisors_recursively(const Divisors& prime_divisors)
 {
     assert(!prime_divisors.empty());
-    //std::cout << "get_proper_divisors: " << to_string(prime_divisors) << std::endl;
+    //std::cout << "get_proper_divisors: " << utils::to_string(prime_divisors) << std::endl;
 
     using AllDivisors = std::set<Primes::value_type>;
 
@@ -141,6 +147,69 @@ ProperDivisors math_lib::get_proper_divisors(const Divisors& prime_divisors)
     return divisors;
 }
 
+/*
+    Purpose
+        two times better than the recursive verion
+            math_performance.get_proper_divisors_iteratively
+        BUT not enough (the direct version is 10x better for 1M numbers)
+
+    Parameters
+        Ex.: (2,3), (3,1), (5,1), (7,2)
+*/
+static
+ProperDivisors get_proper_divisors_iteratively(const Divisors& prime_divisors)
+{
+    assert(!prime_divisors.empty());
+
+    //  iterate the cartesian product of the given primes
+    std::vector<size_t> iterators;
+    iterators.resize(prime_divisors.size());
+
+    const auto get_product = [](const Divisors& primes, const std::vector<size_t>& iterators)
+    {
+        double prod = 1;
+        for (size_t i = 0; i < iterators.size(); ++i)
+            prod *= std::pow(primes[i].first, iterators[i]);
+        return prod;
+    };
+
+    const auto get_next = [](const Divisors& primes, std::vector<size_t>& iterators)
+    {
+        for (auto pos = 0;pos < iterators.size();++pos)
+        {
+            if (iterators[pos] < primes[pos].second)
+            {
+                ++iterators[pos];
+                return true;
+            }
+            iterators[pos] = 0;
+        };
+        return false;
+    };
+
+    ProperDivisors divisors;
+    do
+    {
+        // std::cout << utils::to_string(iterators) << std::endl;
+
+        const auto next_divisor = get_product(prime_divisors, iterators);
+        divisors.push_back(static_cast<ProperDivisors::value_type>(next_divisor));
+    }
+    while(get_next(prime_divisors, iterators));
+
+    //  O(NlogN): this is dominated by the previous loop
+    std::sort(divisors.begin(), divisors.end());
+    divisors.pop_back();
+
+    return divisors;
+}
+
+ProperDivisors math_lib::get_proper_divisors(const Divisors& prime_divisors)
+{
+    // return get_proper_divisors_recursively(prime_divisors);
+    return get_proper_divisors_iteratively(prime_divisors);
+}
+
 TEST(math, get_primes)
 {
     using namespace math_lib;
@@ -163,22 +232,83 @@ TEST(math, get_prime_divisors)
     ASSERT_EQ((Divisors{{5u, 1u}}), get_prime_divisors(5, primes_1000));
     ASSERT_EQ((Divisors{{2u,1u}, {3u,1u}}), get_prime_divisors(6, primes_1000));
     ASSERT_EQ((Divisors{{2u,3u}}), get_prime_divisors(8, primes_1000));
+    ASSERT_EQ((Divisors{{2u,2u}, {7u,1u}}), get_prime_divisors(28, primes_1000));
     ASSERT_EQ((Divisors{{2u,3u}, {7u,1u}}), get_prime_divisors(56, primes_1000));
     ASSERT_EQ((Divisors{{2u,3u}, {3u,2u}}), get_prime_divisors(72, primes_1000));
 
 /*    std::cout << "get_prime_divisors(100) "
-              << to_string(get_prime_divisors(100, primes_1000)) << "." << std::endl;*/
+              << utils::to_string(get_prime_divisors(100, primes_1000)) << "." << std::endl;*/
 }
 
+/*
+    modern-cpp-challenge.exe --gtest_filter=math.get_proper_divisors
+*/
 TEST(math, get_proper_divisors)
 {
     using namespace math_lib;
     using Divs = Primes;
 
     const auto primes_1000 = get_primes(1000);
-    ASSERT_EQ(Divs({1}), get_proper_divisors(get_prime_divisors(2, primes_1000)));
-    ASSERT_EQ(Divs({1, 2, 3}), get_proper_divisors(get_prime_divisors(6, primes_1000)));
-    ASSERT_EQ(Divs({1, 2, 4}), get_proper_divisors(get_prime_divisors(8, primes_1000)));
-    ASSERT_EQ(Divs({1, 2, 3, 4, 6}), get_proper_divisors(get_prime_divisors(12, primes_1000)));
-    ASSERT_EQ(Divs({1, 2, 3, 4, 6, 8, 12}), get_proper_divisors(get_prime_divisors(24, primes_1000)));
+
+    auto prime_divisors = get_prime_divisors(2, primes_1000);
+    ASSERT_EQ(Divs({1}), get_proper_divisors_recursively(prime_divisors));
+    ASSERT_EQ(Divs({1}), get_proper_divisors_iteratively(prime_divisors));
+
+    prime_divisors = get_prime_divisors(6, primes_1000);
+    ASSERT_EQ(Divs({1, 2, 3}), get_proper_divisors_iteratively(prime_divisors));
+    ASSERT_EQ(Divs({1, 2, 3}), get_proper_divisors_recursively(prime_divisors));
+
+    prime_divisors = get_prime_divisors(8, primes_1000);
+    ASSERT_EQ(Divs({1, 2, 4}), get_proper_divisors_iteratively(prime_divisors));
+    ASSERT_EQ(Divs({1, 2, 4}), get_proper_divisors_recursively(prime_divisors));
+
+    prime_divisors = get_prime_divisors(12, primes_1000);
+    ASSERT_EQ(Divs({1, 2, 3, 4, 6}), get_proper_divisors_iteratively(prime_divisors));
+    ASSERT_EQ(Divs({1, 2, 3, 4, 6}), get_proper_divisors_recursively(prime_divisors));
+
+    prime_divisors = get_prime_divisors(24, primes_1000);
+    ASSERT_EQ(Divs({1, 2, 3, 4, 6, 8, 12}), get_proper_divisors_iteratively(prime_divisors));
+    ASSERT_EQ(Divs({1, 2, 3, 4, 6, 8, 12}), get_proper_divisors_recursively(prime_divisors));
+
+    prime_divisors = get_prime_divisors(8*3*5*49, primes_1000);
+    ASSERT_EQ(get_proper_divisors_recursively(prime_divisors), get_proper_divisors_iteratively(prime_divisors));
+}
+
+/*
+    modern-cpp-challenge.exe --gtest_filter=math_performance.get_proper_divisors_recursively
+
+    10000:      0.565s
+    100000:     5.742s
+*/
+TEST(math_performance, DISABLED_get_proper_divisors_recursively)
+{
+    const auto primes_1000 = get_primes(1000);
+    const auto divisors = get_prime_divisors(24, primes_1000);
+    for (auto i = 0; i < 10000; ++i)
+        ASSERT_EQ(Primes({1, 2, 3, 4, 6, 8, 12}), get_proper_divisors_recursively(divisors));
+}
+
+/*
+    modern-cpp-challenge.exe --gtest_filter=math_performance.get_proper_divisors_iteratively
+
+    10000:      0.379s
+    100000:     3.877s
+*/
+TEST(math_performance, DISABLED_get_proper_divisors_iteratively)
+{
+    const auto primes_1000 = get_primes(1000);
+    const auto divisors = get_prime_divisors(24, primes_1000);
+    for (auto i = 0; i < 10000; ++i)
+        ASSERT_EQ(Primes({1, 2, 3, 4, 6, 8, 12}), get_proper_divisors_iteratively(divisors));
+}
+
+/*
+    100000:     3.587s
+*/
+TEST(math_performance, DISABLED_get_proper_divisors_iteratively_no_sort)
+{
+    const auto primes_1000 = get_primes(1000);
+    const auto divisors = get_prime_divisors(24, primes_1000);
+    for (auto i = 0; i < 100000; ++i)
+        ASSERT_EQ(Primes({1, 2, 4, 8, 3, 6, 12}), get_proper_divisors_iteratively(divisors));
 }
