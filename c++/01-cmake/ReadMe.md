@@ -67,6 +67,7 @@ How to set a cross-compiler cross-platform C++ environment with cmake and vcpkg
         (VS x64 build environment and x64 binaries)
     - go to the build folder (CMake likes to build where called)
     - cmake -G Ninja <CMakeLists.txt folder>
+        (folder, not CMakeLists.txt path!)
     - ninja to build
 
     4.1 Windows, llvm 8.0.0, Ninja
