@@ -1,10 +1,15 @@
 /*
+	Purpose
+		measure duration, but not useful with Google Test which also does it (in ms)
+
 	Reference
 		https://stackoverflow.com/questions/2808398/easily-measure-elapsed-time
 */
 #pragma once
 
 #include <chrono>
+#include <iomanip>
+#include <iostream>
 
 namespace utils
 {
