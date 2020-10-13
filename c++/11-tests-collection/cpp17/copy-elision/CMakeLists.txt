@@ -12,6 +12,7 @@
         see NonMoveable.h
 
     \todo : multiple configurations with VS Community 2017, 15.9.4
+        Best is command line & ninja: https://github.com/landron/workshop/tree/master/c%2B%2B/01-cmake
 
     Knowledge base
         * CMake GUI: "Delete cache" after defining VCPKG_ROOT
