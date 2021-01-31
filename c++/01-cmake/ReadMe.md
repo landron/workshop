@@ -102,8 +102,8 @@ https://github.com/Microsoft/vcpkg/blob/master/docs/examples/installing-and-usin
 
 ## Reference
 * https://llvm.org/docs/GettingStartedVS.html
-* https://stackoverflow.com/questions/38171878/how-do-i-tell-cmake-to-use-clang-on-windows
-    what is T"LLVM-vs2014" ?
+* https://stackoverflow.com/questions/38171878/how-do-i-tell-cmake-to-use-clang-on-windows <br/>
+    what is T"LLVM-vs2014" ? <br/>
     see Configurations, 3: LLVM-vs2017 is the toolset used for "Visual Studio 15 2017" + LLVM (6->8)
 * https://stackoverflow.com/questions/43464856/integrate-llvm-clang-4-x-x-5-x-x-6-x-x-into-visual-studio-2017
 * https://github.com/arves100/llvm-vs2017-integration
