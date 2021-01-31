@@ -74,7 +74,7 @@ How to set a cross-compiler cross-platform C++ environment with cmake and vcpkg
     cmake -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_LINKER=llvm-ld <CMakeLists.txt folder>
 
 ### Known issues
-* "clang-cl : warning : argument unused during compilation: '/Gm-' [-Wunused-command-line-argument]"
+* "clang-cl : warning : argument unused during compilation: '/Gm-' [-Wunused-command-line-argument]" <br/>
     clang + VS, see https://stackoverflow.com/questions/50883851/how-to-stop-gm-being-passed-to-clang-cl-exe-from-cmake
 
 ### Knowledge base
