@@ -97,7 +97,7 @@ https://github.com/Microsoft/vcpkg/blob/master/docs/examples/installing-and-usin
   Without "vcpkg integrate install", explicit paths are needed:
     * target_include_directories(${PROJECT_NAME} PRIVATE ${SQLite3_INCLUDE_DIR}) <br/>
     * target_link_libraries(${PROJECT_NAME} ${SQLite3_LIBRARY})
- * Could NOT find GTest (missing: GTEST_LIBRARY GTEST_INCLUDE_DIR GTEST_MAIN_LIBRARY)
+ * Could NOT find GTest (missing: GTEST_LIBRARY GTEST_INCLUDE_DIR GTEST_MAIN_LIBRARY) <br/>
   call project(...) after set(CMAKE_TOOLCHAIN_FILE ...)
 
 ## Reference
