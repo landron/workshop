@@ -70,7 +70,7 @@ How to set a cross-compiler cross-platform C++ environment with cmake and vcpkg
         (folder, not CMakeLists.txt path!)
     - ninja to build
 
-    4.1 Windows, llvm 8.0.0, Ninja
+    4.1 Windows, llvm 8.0.0, Ninja <br/>
     cmake -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_LINKER=llvm-ld <CMakeLists.txt folder>
 
 ### Known issues
