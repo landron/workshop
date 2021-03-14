@@ -7,7 +7,6 @@
 	find_package(Libevent CONFIG REQUIRED)
     target_link_libraries(main PRIVATE libevent::core libevent::extra)
 ]]
-
 cmake_minimum_required(VERSION 3.12)
 
 #	vcpkg integration
@@ -17,7 +16,6 @@ if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     message(STATUS "VCPKG_ROOT=${VCPKG_ROOT}")
     set(CMAKE_TOOLCHAIN_FILE "${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE FILEPATH "")
 endif()
-#message("CMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}")
 
 
 #set(CMAKE_CXX_STANDARD 20)
