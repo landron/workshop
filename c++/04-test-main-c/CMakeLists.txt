@@ -1,15 +1,15 @@
 #[[
-	* go to build folder
-	* VsDevCmd.bat -arch=amd64
-	* cmake -G Ninja <path to this CMakeLists.txt folder>
-	* ninja
+    * go to build folder
+    * VsDevCmd.bat -arch=amd64
+    * cmake -G Ninja <path to this CMakeLists.txt folder>
+    * ninja
 
-	find_package(Libevent CONFIG REQUIRED)
+    find_package(Libevent CONFIG REQUIRED)
     target_link_libraries(main PRIVATE libevent::core libevent::extra)
 ]]
 cmake_minimum_required(VERSION 3.12)
 
-#	vcpkg integration
+#   vcpkg integration
 # https://vcpkg.readthedocs.io/en/latest/users/integration/
 if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")
