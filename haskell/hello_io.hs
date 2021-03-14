@@ -1,12 +1,14 @@
 {-
+  WIP !
+
   Purpose:
    * get number of tests, T
    * get the number of pairs, N, for the each tests
    * get N (x, y) coordinates
 
   Run
-	 * ghc --make -O2 ./test.hs
-   * runhaskell ./test.hs ?
+	 * ghc --make -O2 hello_io.hs
+   ( * or runhaskell hello_io.hs ?)
 
 	Reference
     In order to tell us what it calculated, it has to change the state of an output device
@@ -24,7 +26,6 @@
 
   #haskell_io #hs_io #hs_import
   -}
--- TODO: use Natural instead of Int
 import Numeric.Natural
 
 repeatNTimes 0 _ = return ()
@@ -40,6 +41,7 @@ repeatNTimes n action = do
     "So use <- when you want to bind results of I/O actions to names
     and you can use let bindings to bind pure expressions to names."
   * return is sort of the opposite to <-.
+  * when: "if something then do some I/O action else return ()"
 
   * stuff: <-, ++, $, . (functions composition)
 -}
