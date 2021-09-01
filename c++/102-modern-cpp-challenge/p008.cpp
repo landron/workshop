@@ -1,6 +1,8 @@
 /*
     8. Armstrong numbers
     Write a program that prints all Armstrong numbers with three digits
+
+        List of narcissistic numbers: https://oeis.org/A005188
 */
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
@@ -71,7 +73,7 @@ void get_narcissistic_numbers_directly(unsigned no_of_digits, void (*callback)(u
         if (is_narcissistic(i, no_of_digits)) 
             callback(i, false, param);
     }
-    callback(0, truncate64, param);
+    callback(0, true, param);
 }
 
 void get_narcissistic_numbers_generating(unsigned no_of_digits, void (*callback)(unsigned, bool, void*), void* param)
@@ -107,22 +109,35 @@ void get_narcissistic_numbers_generating(unsigned no_of_digits, void (*callback)
 
 };
 
-void modern_cpp_challenge::print_narcissistic_numbers(unsigned limit)
+/*
+    Ubuntu
+            generating      directly
+    6:      130 ms          134 ms
+    7:      1451 ms         1536 ms
+    8:      19800 ms        17475 ms        ?
+            79987 ms
+*/
+void modern_cpp_challenge::print_narcissistic_numbers(unsigned limit, bool generate)
 {
     auto print = [](unsigned number, bool is_last, void* param) {
         auto last = static_cast<unsigned*>(param);
         if (!is_last) {
             if (*last)
-                std::cout << *last << ", ";
+                std::cout << *last << ", " << std::flush;;
             *last = number;
         } 
         else if (*last)
             std::cout << *last << std::endl;
     };
 
+    std::cout << "Printing narcisstic numbers with " << limit << " digits ...\n";
+    std::cout << "\t(using " << (generate ? "generating" : "direct") << " method)" << std::endl;
+
     unsigned last = 0;
-    // get_narcissistic_numbers_directly(limit, print, &last);
-    get_narcissistic_numbers_generating(limit, print, &last);
+    if (generate)
+        get_narcissistic_numbers_generating(limit, print, &last);
+    else
+        get_narcissistic_numbers_directly(limit, print, &last);
 }
 
 TEST(test_p8, base)

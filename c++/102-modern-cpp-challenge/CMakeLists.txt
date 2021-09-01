@@ -27,6 +27,8 @@
             (set DOS command)
         * update vcpkg: git pull, bootstrap-vcpkg.bat
         * update packages: see vcpkg parameters
+
+        * VC Code integration on Linux: see https://code.visualstudio.com/docs/cpp/cmake-linux
     ]]
 cmake_minimum_required(VERSION 3.12)
 
