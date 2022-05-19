@@ -23,6 +23,12 @@ auto get_number_of_digits(unsigned number)
     return digits;
 }
 
+static inline
+unsigned powu(unsigned base, unsigned exp)
+{
+    return static_cast<unsigned>(std::pow(base, exp));
+}
+
 /*
     In number theory, a narcissistic number, in a given number base b is a number that is the sum of its own digits each raised to the power of the number of digits.
 */
@@ -33,7 +39,7 @@ bool is_narcissistic(unsigned number, unsigned digits = 0)
 
     unsigned sum = 0;
     for (unsigned  i = number; i; i /= 10)
-        sum += std::pow(i%10, digits);
+        sum += powu(i%10, digits);
     return sum == number;
 }
 
@@ -42,7 +48,7 @@ void print_narcissistic_numbers_until(unsigned limit)
 {
     assert(limit > 10 && limit < 100000);
 
-    size_t i;
+    unsigned i;
     for (i = 0; i < 10; ++i)
         std::cout << i << ", ";
     auto last = 0;
@@ -69,7 +75,7 @@ void get_narcissistic_numbers_directly(unsigned no_of_digits, void (*callback)(u
 {
     assert(no_of_digits);
 
-    for (unsigned i = no_of_digits == 1 ? 0 : std::pow(10, no_of_digits-1), end = std::pow(10, no_of_digits); i < end; ++i) {
+    for (unsigned i = no_of_digits == 1 ? 0 : powu(10, no_of_digits-1), end = powu(10, no_of_digits); i < end; ++i) {
         if (is_narcissistic(i, no_of_digits)) 
             callback(i, false, param);
     }
@@ -97,9 +103,9 @@ void get_narcissistic_numbers_generating(unsigned no_of_digits, void (*callback)
 
         auto number = 0;
         auto sum = 0;
-        for (auto i = 0; i < no_of_digits; ++i) {
+        for (unsigned i = 0; i < no_of_digits; ++i) {
             number = number*10 + digits[i]; 
-            sum += std::pow(digits[i], no_of_digits);
+            sum += powu(digits[i], no_of_digits);
         }
         if (number == sum)
             callback(number, false, param);
