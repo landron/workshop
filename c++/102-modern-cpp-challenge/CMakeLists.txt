@@ -23,13 +23,17 @@
             see https://github.com/landron/workshop/tree/master/c%2B%2B/01-cmake,
                     4.Windows, Visual Studio 15 2017, Ninja
                     ! VsDevCmd.bat -arch=amd64
-            modern-cpp-challenge.exe --gtest_list_tests
-            modern-cpp-challenge.exe --gtest_filter=test_p03*
+            modern-cpp-challenge --gtest_list_tests
+            modern-cpp-challenge --gtest_filter=test_p03*
+
+            modern-cpp-challenge --gtest_filter=test_main*
 
         * CMake GUI: "Delete cache" after defining VCPKG_ROOT
             (set DOS command)
         * update vcpkg: git pull, bootstrap-vcpkg.bat
         * update packages: see vcpkg parameters
+
+        * VC Code integration on Linux: see https://code.visualstudio.com/docs/cpp/cmake-linux
     ]]
 cmake_minimum_required(VERSION 3.12)
 
@@ -63,7 +67,8 @@ project(modern-cpp-challenge)
 find_package(GTest MODULE REQUIRED)
 
 set(sources main.cpp problems.h lib/math.h lib/math.cpp lib/utils.h lib/utils.cpp)
-set(sources ${sources} p001.cpp p002003.cpp p004005.cpp p006007.cpp)
+file(GLOB_RECURSE PROBLEM_FILES "${PROJECT_SOURCE_DIR}/p*.cpp")
+set(sources ${sources} ${PROBLEM_FILES})
 add_executable(${PROJECT_NAME} ${sources})
 # it also adds include path
 target_link_libraries(${PROJECT_NAME} PRIVATE GTest::GTest GTest::Main)

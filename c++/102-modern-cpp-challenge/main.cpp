@@ -28,10 +28,12 @@ TEST(test_main, almost_all_problems)
         if (0)
         print_abundant_numbers(200);
 
-        // if (0)
+        if (0)
         {
             utils::Duration measure("print_amicable_numbers(1000000)");
             print_amicable_numbers(1000000);
         }
+
+        print_narcissistic_numbers(7, true);
     }
 }

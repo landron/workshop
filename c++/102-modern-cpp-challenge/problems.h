@@ -12,6 +12,6 @@ namespace modern_cpp_challenge
 
     unsigned get_abundance(unsigned, const math_lib::Primes&);
     void print_abundant_numbers(unsigned limit);
-
     void print_amicable_numbers(unsigned limit);
+    void print_narcissistic_numbers(unsigned limit, bool generate=true);
 };
