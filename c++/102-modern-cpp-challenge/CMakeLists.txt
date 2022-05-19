@@ -1,5 +1,10 @@
 #[[
-    vcpkg install gtest --triplet x64-windows
+    Commands
+        cd F:\_Devel\build\modern-cpp-challenge-cmd
+            go to the build directory
+        cmake -G Ninja ./ -DCMAKE_BUILD_TYPE=Debug
+
+        vcpkg install gtest --triplet x64-windows
 
     "The package gtest is compatible with built-in CMake targets:
         enable_testing()
