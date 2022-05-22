@@ -122,6 +122,8 @@ void get_narcissistic_numbers_generating(unsigned no_of_digits, void (*callback)
     7:      1451 ms         1536 ms
     8:      19800 ms        17475 ms        ?
             79987 ms
+
+    see performance_narcissistic_numbers_* tests below
 */
 void modern_cpp_challenge::print_narcissistic_numbers(unsigned limit, bool generate)
 {
@@ -194,4 +196,26 @@ TEST(test_p8, 4digits_narcissistic)
     found.clear();
     get_narcissistic_numbers_generating(4, populate, &found);
     ASSERT_THAT(expected, testing::ContainerEq(found));
+}
+
+
+/*
+    ./modern-cpp-challenge --gtest_filter=*performance_narcissistic_numbers*
+
+    8:  24678050, 24678051, 88593477
+        https://oeis.org/A005188
+
+    Ubuntu home
+            direct          generate
+    7:      4447 ms         4891 ms
+    8:      50538           56462
+*/
+TEST(test_p8, DISABLED_performance_narcissistic_numbers_direct)
+{
+    modern_cpp_challenge::print_narcissistic_numbers(8, false);
+}
+
+TEST(test_p8, DISABLED_performance_narcissistic_numbers_generate)
+{
+    modern_cpp_challenge::print_narcissistic_numbers(8, true);
 }

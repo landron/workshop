@@ -2,9 +2,11 @@
     Commands
         cd F:\_Devel\build\modern-cpp-challenge-cmd
             go to the build directory
-        cmake -G Ninja ./ -DCMAKE_BUILD_TYPE=Debug
+        cmake -G Ninja <path to CMakeLists.txt folder> -DCMAKE_BUILD_TYPE=Debug
+        (or RelWithDebInfo)
 
         vcpkg install gtest --triplet x64-windows
+        (or 64-linux)
 
     "The package gtest is compatible with built-in CMake targets:
         enable_testing()
