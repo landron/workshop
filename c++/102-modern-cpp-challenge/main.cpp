@@ -34,6 +34,6 @@ TEST(test_main, almost_all_problems)
             print_amicable_numbers(1000000);
         }
 
-        print_narcissistic_numbers(7, true);
+        print_narcissistic_numbers(8, NARCISSISTIC_GENERATE);
     }
 }

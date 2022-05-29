@@ -24,7 +24,7 @@ auto get_number_of_digits(unsigned number)
 }
 
 static inline
-unsigned powu(unsigned base, unsigned exp)
+auto powu(unsigned base, unsigned exp)
 {
     return static_cast<unsigned>(std::pow(base, exp));
 }
@@ -82,7 +82,8 @@ void get_narcissistic_numbers_directly(unsigned no_of_digits, void (*callback)(u
     callback(0, true, param);
 }
 
-void get_narcissistic_numbers_generating(unsigned no_of_digits, void (*callback)(unsigned, bool, void*), void* param)
+void get_narcissistic_numbers_generating_1(unsigned no_of_digits,
+        void (*callback)(unsigned, bool, void*), void* param)
 {
     assert(no_of_digits);
 
@@ -104,7 +105,7 @@ void get_narcissistic_numbers_generating(unsigned no_of_digits, void (*callback)
         auto number = 0;
         auto sum = 0;
         for (unsigned i = 0; i < no_of_digits; ++i) {
-            number = number*10 + digits[i]; 
+            number = number*10 + digits[i];
             sum += powu(digits[i], no_of_digits);
         }
         if (number == sum)
@@ -113,9 +114,51 @@ void get_narcissistic_numbers_generating(unsigned no_of_digits, void (*callback)
     callback(0, true, param);
 }
 
+void get_narcissistic_numbers_generating_2(unsigned no_of_digits,
+        void (*callback)(unsigned, bool, void*), void* param)
+{
+    assert(no_of_digits);
+
+    std::vector<unsigned> digits;
+    digits.resize(no_of_digits);
+
+    digits[0] = 1;
+    auto number = powu(10, no_of_digits-1);
+    auto sum = powu(1, no_of_digits);
+    for (int i = no_of_digits - 1; i >= 0; ) {
+        sum -= powu(digits[i], no_of_digits);
+        number -= digits[i]*powu(10, no_of_digits-1-i);
+        ++digits[i];
+        if (digits[i] == 10) {
+            digits[i] = 0;
+            --i;
+            continue;
+        }
+        else {
+            sum += powu(digits[i], no_of_digits);
+            number += digits[i]*powu(10, no_of_digits-1-i);
+            if (i != no_of_digits-1)
+                i = no_of_digits-1;
+        }
+
+        if (number == sum)
+            callback(number, false, param);
+    }
+    callback(0, true, param);
+}
+
+void get_narcissistic_numbers_generating(unsigned no_of_digits,
+        void (*callback)(unsigned, bool, void*), void* param) {
+    return get_narcissistic_numbers_generating_2(no_of_digits, callback, param);
+}
+
 };
 
 /*
+    Performance
+        8:  24678050, 24678051, 88593477
+        https://oeis.org/A005188
+
     Ubuntu
             generating      directly
     6:      130 ms          134 ms
@@ -123,9 +166,14 @@ void get_narcissistic_numbers_generating(unsigned no_of_digits, void (*callback)
     8:      19800 ms        17475 ms        ?
             79987 ms
 
+    Windows (ms)
+            generating      directly    generating2
+    7:      22304           6329        8827
+    8:      247596          79588       77403
+
     see performance_narcissistic_numbers_* tests below
 */
-void modern_cpp_challenge::print_narcissistic_numbers(unsigned limit, bool generate)
+void modern_cpp_challenge::print_narcissistic_numbers(unsigned limit, unsigned generate)
 {
     auto print = [](unsigned number, bool is_last, void* param) {
         auto last = static_cast<unsigned*>(param);
@@ -142,10 +190,17 @@ void modern_cpp_challenge::print_narcissistic_numbers(unsigned limit, bool gener
     std::cout << "\t(using " << (generate ? "generating" : "direct") << " method)" << std::endl;
 
     unsigned last = 0;
-    if (generate)
-        get_narcissistic_numbers_generating(limit, print, &last);
-    else
-        get_narcissistic_numbers_directly(limit, print, &last);
+    switch (generate) {
+        case NARCISSISTIC_DIRECT:
+            get_narcissistic_numbers_directly(limit, print, &last);
+            break;
+        case NARCISSISTIC_GENERATE_OLD:
+            get_narcissistic_numbers_generating_1(limit, print, &last);
+            break;
+        case NARCISSISTIC_GENERATE:
+            get_narcissistic_numbers_generating_2(limit, print, &last);
+            break;
+    }
 }
 
 TEST(test_p8, base)
@@ -198,7 +253,6 @@ TEST(test_p8, 4digits_narcissistic)
     ASSERT_THAT(expected, testing::ContainerEq(found));
 }
 
-
 /*
     ./modern-cpp-challenge --gtest_filter=*performance_narcissistic_numbers*
 
@@ -206,16 +260,27 @@ TEST(test_p8, 4digits_narcissistic)
         https://oeis.org/A005188
 
     Ubuntu home
-            direct          generate
+            direct          generate    generate2
     7:      4447 ms         4891 ms
     8:      50538           56462
+
+    Windows 7
+    8:      81673 ms        245143      107017
 */
 TEST(test_p8, DISABLED_performance_narcissistic_numbers_direct)
 {
-    modern_cpp_challenge::print_narcissistic_numbers(8, false);
+    using namespace modern_cpp_challenge;
+    print_narcissistic_numbers(8, NARCISSISTIC_DIRECT);
 }
 
 TEST(test_p8, DISABLED_performance_narcissistic_numbers_generate)
 {
-    modern_cpp_challenge::print_narcissistic_numbers(8, true);
+    using namespace modern_cpp_challenge;
+    print_narcissistic_numbers(8, NARCISSISTIC_GENERATE_OLD);
+}
+
+TEST(test_p8, DISABLED_performance_narcissistic_numbers_generate_2)
+{
+    using namespace modern_cpp_challenge;
+    print_narcissistic_numbers(8, NARCISSISTIC_GENERATE);
 }
