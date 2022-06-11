@@ -17,7 +17,7 @@ using namespace math_lib;
     Return value
         no cost: the vector will be just moved
 */
-Primes math_lib::get_primes(unsigned limit)
+Primes math_lib::get_primes(unsigned long long limit)
 {
     if (limit < 3)
         return {};
@@ -72,7 +72,7 @@ Divisors math_lib::get_prime_divisors(unsigned number, const Primes& primes)
             break;
         if (number % i)
             continue;
-        divisors.push_back(std::make_pair(i, get_power(number, i)));
+        divisors.push_back(std::make_pair(i, static_cast<unsigned>(get_power(number, i))));
         if (number == 1)
             break;
     }

@@ -6,11 +6,13 @@
 namespace math_lib
 {
 
-using Primes = std::vector<unsigned>;
-using Divisors = std::vector<std::pair<unsigned, unsigned>>;
+using Number = unsigned;
+using Primes = std::vector<Number>;
+using Divisor = std::pair<Number, unsigned>;
+using Divisors = std::vector<Divisor>;
 using ProperDivisors = Primes;
 
-Primes get_primes(unsigned);
+Primes get_primes(unsigned long long);
 Divisors get_prime_divisors(unsigned, const Primes& primes);
 
 // This is still slow
