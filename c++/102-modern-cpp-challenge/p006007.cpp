@@ -20,16 +20,18 @@
 namespace
 {
 
-auto proper_divisors_sum(unsigned number)
+template <typename NumberType>
+inline
+auto proper_divisors_sum(NumberType number)
 {
-    const auto limit = 1 + static_cast<unsigned>(std::floor(std::sqrt(number)));
+    const auto limit = 1 + static_cast<NumberType>(std::floor(std::sqrt(number)));
     decltype(number) sum = 1;
     for (decltype(number) i = 2; i < limit; ++i)
     {
         if (number % i == 0)
         {
             sum += i;
-            const auto other = static_cast<unsigned>(number/i);
+            const auto other = static_cast<NumberType>(number/i);
             // skip the other 2 for 4
             if (other != i)
                 sum += other;
@@ -38,14 +40,16 @@ auto proper_divisors_sum(unsigned number)
     return sum;
 }
 
-auto advanced_proper_divisors_sum(unsigned number, const math_lib::Primes& primes)
+template <typename NumberType>
+inline
+auto advanced_proper_divisors_sum(NumberType number, const math_lib::Primes& primes)
 {
     const auto prime_divs = math_lib::get_prime_divisors(number, primes);
     if (prime_divs.empty())
         std::cout << "prime_divs.empty(): " << number << std::endl;
 
     const auto divs = math_lib::get_proper_divisors(prime_divs);
-    return std::accumulate(divs.begin(), divs.end(), 0u);
+    return std::accumulate(divs.begin(), divs.end(), 0llu);
 }
 
 /*
@@ -92,7 +96,7 @@ void print_amicable_numbers_advanced(unsigned limit)
 
 unsigned modern_cpp_challenge::get_abundance(unsigned number, const math_lib::Primes& primes)
 {
-    const auto sum = advanced_proper_divisors_sum(number, primes);
+    const auto sum = static_cast<unsigned>(advanced_proper_divisors_sum(number, primes));
     return sum > number ? (sum - number) : 0;
 }
 

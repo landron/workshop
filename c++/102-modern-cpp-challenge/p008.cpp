@@ -159,17 +159,16 @@ void get_narcissistic_numbers_generating(unsigned no_of_digits,
         8:  24678050, 24678051, 88593477
         https://oeis.org/A005188
 
-    Ubuntu
-            generating      directly
-    6:      130 ms          134 ms
-    7:      1451 ms         1536 ms
-    8:      19800 ms        17475 ms        ?
-            79987 ms
+    Ubuntu (ms)
+            directly    generating
+    6:      134         130
+    7:      1536        1451
+    8:      17475       19800
 
     Windows (ms)
-            generating      directly    generating2
-    7:      22304           6329        8827
-    8:      247596          79588       77403
+            directly    generating      generating2
+    7:      6329        22304           8827
+    8:      79588       247596          77403
 
     see performance_narcissistic_numbers_* tests below
 */
@@ -264,8 +263,9 @@ TEST(test_p8, 4digits_narcissistic)
     7:      4447 ms         4891 ms
     8:      50538           56462
 
-    Windows 7
+    Windows 7  (ms)
     8:      81673 ms        245143      107017
+            72174           246997      86742
 */
 TEST(test_p8, DISABLED_performance_narcissistic_numbers_direct)
 {

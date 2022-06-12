@@ -1,8 +1,5 @@
 /*
     9. Prime factors of a number
-
-    TO-DO
-        WIP As a further exercise, determine the largest prime factor for the number 600,851,475,143.
 */
 
 #include <gtest/gtest.h>
@@ -10,11 +7,11 @@
 #include "math.h"
 #include "problems.h"
 
-void modern_cpp_challenge::print_prime_factors(unsigned number)
+void modern_cpp_challenge::print_prime_factors(unsigned long long number)
 {
     using namespace math_lib;
 
-    const auto primes = get_primes(number);
+    const auto primes = get_primes_for(number);
     const auto divisors = get_prime_divisors(number, primes);
 
     auto print_b = [](Number divisor, unsigned power, bool is_last) {
@@ -35,4 +32,18 @@ void modern_cpp_challenge::print_prime_factors(unsigned number)
         print(divisors[i]);
     print(divisors.back(), true);
     std::cout << std::endl;
+}
+
+/*
+    ./modern-cpp-challenge --gtest_filter=*largest_prime_factor*
+    264ms
+
+    As a further exercise, determine the largest prime factor for the number 600,851,475,143.
+        6857
+*/
+TEST(test_p9, DISABLED_largest_prime_factor)
+{
+    static_assert(sizeof(unsigned long) >= 4);
+    static_assert(1llu * 71 * 839 * 1471 * 6857 == 600'851'475'143);
+    modern_cpp_challenge::print_prime_factors(600'851'475'143);
 }

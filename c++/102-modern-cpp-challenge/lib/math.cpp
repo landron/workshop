@@ -48,7 +48,7 @@ Primes math_lib::get_primes(unsigned long long limit)
     Reference
         proj_euler.py/get_prime_divisors
 */
-Divisors math_lib::get_prime_divisors(unsigned number, const Primes& primes)
+Divisors math_lib::get_prime_divisors(unsigned long long number, const Primes& primes)
 {
     const auto get_power = [](auto& number, auto divisor)
     {
@@ -134,7 +134,7 @@ ProperDivisors get_proper_divisors_recursively(const Divisors& prime_divisors)
     };
 
     AllDivisors result{1};
-    get_all_combinations(prime_divisors, 0u, 1u, result);
+    get_all_combinations(prime_divisors, 0llu, 1llu, result);
     ProperDivisors divisors;
     for (auto i : result)
     {
