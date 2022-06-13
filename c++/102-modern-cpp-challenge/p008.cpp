@@ -258,10 +258,11 @@ TEST(test_p8, 4digits_narcissistic)
     8:  24678050, 24678051, 88593477
         https://oeis.org/A005188
 
-    Ubuntu home
+    Ubuntu home (ms)
             direct          generate    generate2
-    7:      4447 ms         4891 ms
+    7:      4447 ms         4891 
     8:      50538           56462
+            51149           57409       20107       2022.06
 
     Windows 7  (ms)
     8:      81673 ms        245143      107017

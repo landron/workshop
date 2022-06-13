@@ -14,7 +14,7 @@ using Divisors = std::vector<Divisor>;
 using ProperDivisors = Primes;
 
 Primes get_primes(unsigned long long);
-inline Primes get_primes_for(unsigned long long);
+static Primes get_primes_for(unsigned long long);
 Divisors get_prime_divisors(unsigned long long, const Primes& primes);
 
 // This is still slow
