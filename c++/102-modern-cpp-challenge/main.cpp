@@ -36,5 +36,8 @@ TEST(test_main, almost_all_problems)
 
         if (0)
         print_narcissistic_numbers(8, NARCISSISTIC_GENERATE);
+
+        if (0)
+        print_gray_code_until(32);
     }
 }

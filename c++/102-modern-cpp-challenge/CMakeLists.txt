@@ -1,8 +1,9 @@
 #[[
     Commands
+        VsDevCmd.bat -arch=amd64
         cd F:\_Devel\build\modern-cpp-challenge-cmd
             go to the build directory
-        cmake -G Ninja <path to CMakeLists.txt folder> -DCMAKE_BUILD_TYPE=Debug
+        cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug <path to CMakeLists.txt folder>
         (or RelWithDebInfo)
 
         vcpkg install gtest --triplet x64-windows
