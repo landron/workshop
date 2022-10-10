@@ -20,4 +20,5 @@ namespace modern_cpp_challenge
     };
     void print_narcissistic_numbers(unsigned limit, unsigned generate);
     void print_prime_factors(unsigned long long number);
+    void print_gray_code_until(unsigned number);
 };
