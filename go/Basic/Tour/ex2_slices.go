@@ -7,9 +7,15 @@
 	* a slice of slices
 	* name return values can be used
 
-	The image can be shown in the page's (tour) player.
+	Troubleshooting
+	ex2_slices.go:17:8: no required module provides package golang.org/x/tour/pic: go.mod file not found in current directory or any parent directory; see 'go help modules'
+		=>
+	go mod init main
+	go mod tidy
 
 	TODO: generate an image file !
+		The image can be shown in the page's (tour) player.
+		Not in terminals.
 */
 package main
 
