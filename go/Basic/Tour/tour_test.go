@@ -40,10 +40,12 @@ func expectEqual(t *testing.T, expected interface{}, actual interface{}) {
 func TestFibonacci(t *testing.T) {
 	f1 := fibonacci1()
 	f2 := fibonacci2()
+	f3 := fibonacci3()
 	prev, curr := -1, 1
 	for i := 0; i < 13; i++ {
 		prev, curr = curr, prev+curr
 		expectEqual(t, f1(), curr)
 		expectEqual(t, f2(), curr)
+		expectEqual(t, f3(), curr)
 	}
 }

@@ -1,7 +1,5 @@
 /*
 	Purpose: https://go.dev/tour/generics/2
-
-	WIP
 */
 package main
 

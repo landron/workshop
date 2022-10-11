@@ -32,8 +32,17 @@ func fibonacci2() func() int {
 	}
 }
 
+func fibonacci3() func() int {
+	x, y := 0, 1
+	return func() int {
+		next := x
+		x, y = y, x+y
+		return next
+	}
+}
+
 func fibonacci() func() int {
-	return fibonacci2()
+	return fibonacci3()
 }
 
 func main() {
