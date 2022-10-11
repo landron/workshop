@@ -1,2 +1,4 @@
+golang.org/x/exp v0.0.0-20221011111909-0220f59fc3e4 h1:vJ72ext0XgGVpu8rmB7rsWFCFaSMeygqU5ewGUzYdNs=
+golang.org/x/exp v0.0.0-20221011111909-0220f59fc3e4/go.mod h1:cyybsKvd6eL0RnXn6p/Grxp8F5bW7iYuBgsNCOHpMYE=
 golang.org/x/tour v0.1.0 h1:OWzbINRoGf1wwBhKdFDpYwM88NM0d1SL/Nj6PagS6YE=
 golang.org/x/tour v0.1.0/go.mod h1:DUZC6G8mR1AXgXy73r8qt/G5RsefKIlSj6jBMc8b9Wc=

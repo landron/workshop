@@ -5,13 +5,23 @@
 */
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+
+	"golang.org/x/exp/constraints"
+)
 
 // List represents a singly-linked list that holds
 // values of any type.
 // comparable: delete by val, sort
-//type Interface any
-type Interface comparable
+// type Interface any
+// type Interface comparable
+type Interface interface {
+	comparable
+	//sort.Interface
+	constraints.Ordered
+}
 
 type List[T Interface] struct {
 	next *List[T]
@@ -85,11 +95,25 @@ func (list *List[T]) Slice() []T {
 	return sl
 }
 
-/*func (list *List[T]) Sort(val T) *List[T] {
+/*
+	https://gosamples.dev/generics-sort-slice/
+*/
+func sortSlice[T constraints.Ordered](s []T) {
+	sort.Slice(s, func(i, j int) bool {
+		return s[i] < s[j]
+	})
+}
+
+func (list *List[T]) Sort() {
 	sl := list.Slice()
-	sl.Sort()
-	return list
-}*/
+	// sl.Sort()
+	sortSlice(sl)
+	i := 0
+	for next := list; next != nil; next = next.next {
+		next.val = sl[i]
+		i++
+	}
+}
 
 func main() {
 	l1 := NewList([]string{"foo", "bar", "baz", "nin"})
@@ -101,5 +125,8 @@ func main() {
 	fmt.Println(l1.Slice())
 	l1 = l1.Append("bin")
 	l1 = l1.Append("kal")
+	l1.Print()
+	l1.Append("cope")
+	l1.Sort()
 	l1.Print()
 }
