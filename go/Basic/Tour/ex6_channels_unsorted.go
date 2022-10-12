@@ -1,6 +1,9 @@
 /*
 	Exercise: Equivalent Binary Trees
 	https://tour.golang.org/concurrency/8
+
+	"constructs a randomly-structured (but always sorted) binary tree"
+		this condition is ignored by this implementation
 */
 package main
 
@@ -43,6 +46,7 @@ func get_tree_values(t *tree.Tree) []int {
 
 // Same determines whether the trees
 // t1 and t2 contain the same values.
+// 	see https://stackoverflow.com/questions/15311969/checking-the-equality-of-two-slices
 func Same(t1, t2 *tree.Tree) bool {
 	s1 := get_tree_values(t1)
 	s2 := get_tree_values(t2)
