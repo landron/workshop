@@ -1,0 +1,25 @@
+# Format: module@version (use @latest for always updating)
+github.com/cweill/gotests/...@latest
+github.com/fatih/gomodifytags@latest
+github.com/go-delve/delve/cmd/dlv@latest
+github.com/josharian/impl@latest
+github.com/rogpeppe/godef@latest
+github.com/segmentio/golines@latest
+github.com/stamblerre/gocode@latest
+golang.org/x/tools/cmd/goimports@latest
+golang.org/x/tools/gopls@latest
+golang.org/x/perf/cmd/benchstat@latest
+honnef.co/go/tools/cmd/staticcheck@latest
+mvdan.cc/gofumpt@latest
+
+########################
+### golangci-lint
+
+# This installs golangci-lint v1.64.8
+# github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+#
+# v2
+# https://golangci-lint.run/docs/welcome/install/#local-installation
+# curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b "$(go env GOPATH)/bin"
+
+
