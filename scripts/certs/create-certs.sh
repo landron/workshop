@@ -1,8 +1,30 @@
-#!/bin/bash
-# Define where to store the generated certs and metadata.
-DIR="$(pwd)/.tls"
+#!/usr/bin/env bash
+# create-certs.sh — Generate a local CA and service certificate for development 🔧
+#
+# Purpose:
+#   Create a self-signed Certificate Authority (CA) and sign a service CSR.
+#   Intended for local development/testing only — NOT for production use.
+#
+# Usage:
+#   TLS_DIR="/path/to/dir" ./create-certs.sh
+#
+# Behavior:
+#   - Creates a ${TLS_DIR:-$(pwd)/.tls} directory (recreated)
+#   - Generates CA key/cert, a service key/CSR and a signed service cert
+#   - Zips results to $HOME/certs.zip
+#
+set -euo pipefail
+IFS=$'\n\t'
 
-# Optional: Ensure the target directory exists and is empty.
+# Ensure required tools are installed
+for cmd in openssl zip realpath; do
+  command -v "$cmd" >/dev/null 2>&1 || { echo >&2 "Required command '$cmd' not found. Please install it."; exit 1; }
+done
+
+# Where to store the generated certs and metadata.
+DIR="${TLS_DIR:-$(pwd)/.tls}"
+
+# Ensure the target directory exists and is empty.
 rm -rf "${DIR}"
 mkdir -p "${DIR}"
 
@@ -73,6 +95,10 @@ openssl req \
   -out "${DIR}/ca.crt"
 # openssl req -new -newkey rsa:2048 -days 120 -nodes -x509 -subj "/C=US/ST=California/L=The Cloud/O=github.com-landron"
 
+# Restrict CA private key permissions and report status
+chmod 600 "${DIR}/ca.key"
+echo "CA generated: ${DIR}/ca.crt (key: ${DIR}/ca.key)"
+
 #
 # For each server/service you want to secure with your CA, repeat the
 # following steps:
@@ -106,6 +132,10 @@ openssl x509 \
 # (Optional) Verify the certificate.
 openssl x509 -in "${DIR}/my-service.crt" -noout -text
 
+# Restrict key permissions and print result summary
+chmod 600 "${DIR}"/*.key
+echo "Generated: ${DIR}/my-service.crt, CA: ${DIR}/ca.crt — keys locked down."
+
 # Here is a sample response (truncate):
 #
 # Certificate:
@@ -126,6 +156,10 @@ openssl x509 -in "${DIR}/my-service.crt" -noout -text
 #                 IP Address:1.2.3.4, DNS:my.dns.name
 #
 
-zip -r ~/certs.zip .tls
-var=$(realpath ~/certs.zip)
-echo "$var updated."
+# Package the certs into a zip in $HOME (keeps directory name, avoids absolute paths)
+pushd "$(dirname "${DIR}")" >/dev/null
+zip -r -q "${HOME}/certs.zip" "$(basename "${DIR}")"
+popd >/dev/null
+
+var=$(realpath "${HOME}/certs.zip")
+echo "${var} updated."
