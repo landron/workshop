@@ -1,4 +1,15 @@
-cmake_minimum_required(VERSION 3.12)
+#[[
+vcpkg installation:
+    git clone https://github.com/microsoft/vcpkg.git
+    cd vcpkg
+    ./bootstrap-vcpkg.sh
+    ./vcpkg integrate install
+        This allows VS Code (via CMake Tools) to auto-detect vcpkg.
+]]
+
+# The first number (3.21) is your floor. It says: "This project requires at least CMake 3.21 to compile."
+# "If the user has a version as new as 3.30, please use the modern, updated logic for that version."
+cmake_minimum_required(VERSION 3.21...3.30)
 
 # https://vcpkg.readthedocs.io/en/latest/users/integration/
 if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
@@ -7,7 +18,7 @@ if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     set(CMAKE_TOOLCHAIN_FILE "${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE FILEPATH "")
 endif()
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -20,12 +31,13 @@ project(hello-vcpkg)
 #[[
     see https://github.com/Microsoft/vcpkg/blob/master/docs/examples/installing-and-using-packages.md
 
-    vcpkg install sqlite3 --triplet x64-windows
+    vcpkg install sqlite3
+        vcpkg install sqlite3 --triplet x64-linux (on Linux)
 
      Without user-wide integration ("vcpkg integrate install"), full paths are needed:
      	SQLite3_INCLUDE_DIR, SQLite3_LIBRARY (instead of saying just sqlite3)
     ]]
-find_package(sqlite3 REQUIRED)
+find_package(SQLite3 REQUIRED)
 
 add_executable(${PROJECT_NAME} hello.cpp ../ReadMe.md)
 target_include_directories(${PROJECT_NAME} PRIVATE ${SQLite3_INCLUDE_DIR})
