@@ -1,6 +1,8 @@
 {
     // This is also defining ./build as build folder
     "cmake.sourceDirectory": "/home/livio/Documents/Code/workshop/c++",
+    "cmake.generator": "Ninja",
+
     // unavoidable for the cmake tools extension to work: CMake/Build terminal is not bash
     //    even if Terminal it is:
     //    "terminal.integrated.defaultProfile.linux": "bash",
@@ -13,6 +15,7 @@
     "cmake.configureSettings": {
         "CMAKE_TOOLCHAIN_FILE": "/home/livio/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"
     }, 
+
     // This only affects editor parsing, not the build
     "C_Cpp.default.defines": [
         "SUBFOLDER=\"${workspaceFolder}/path/to/subfolder\""

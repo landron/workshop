@@ -11,6 +11,7 @@ set(VCPKG_PREFER_SYSTEM_LIBS OFF)
 set(CMAKE_FIND_PACKAGE_PREFER_CONFIG ON)
 
 project(workshop)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Add all CMake subprojects
 add_subdirectory(01-cmake/01-start)

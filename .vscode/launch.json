@@ -1,0 +1,33 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch CMake Project",
+            "type": "cppdbg",
+            "request": "launch",
+
+            // Adjust the path to your executable
+            // "program": "${workspaceFolder}/build/bin/hello-vs-llvm-vcpkg", 
+            "program": "${workspaceFolder}/build/bin/copy-elision",
+            // CMake: Set Launch/Debug Target in VS Code
+            // "program": "${command:cmake.launchTargetPath}",
+
+            //"args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            //"environment": [],
+            //"externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}
