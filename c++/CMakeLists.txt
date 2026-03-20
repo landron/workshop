@@ -1,4 +1,14 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.21...3.30)
+
+if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+    set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE FILEPATH "")
+endif()
+message(STATUS "[master] VCPKG_ROOT=$ENV{VCPKG_ROOT}")
+message(STATUS "[master] CMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}")
+
+# Prefer vcpkg libraries over system
+set(VCPKG_PREFER_SYSTEM_LIBS OFF)
+set(CMAKE_FIND_PACKAGE_PREFER_CONFIG ON)
 
 project(workshop)
 

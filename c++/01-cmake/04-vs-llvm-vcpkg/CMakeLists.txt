@@ -32,4 +32,8 @@ endif()
 if(CMAKE_GENERATOR_TOOLSET MATCHES "^llvm")
     target_compile_options(${PROJECT_NAME} PRIVATE "-Wno-error=unused-command-line-argument")
 endif()
+
+file(RELATIVE_PATH SUBFOLDER ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
+target_compile_definitions(${PROJECT_NAME} PRIVATE SUBFOLDER="${SUBFOLDER}")
+
 target_link_libraries(${PROJECT_NAME} sqlite3)
