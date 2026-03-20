@@ -4,16 +4,19 @@
         the two event_new
 */
 #ifndef _WIN32
+#define _POSIX_C_SOURCE 200112L
 #include <netinet/in.h>
 # ifdef _XOPEN_SOURCE_EXTENDED
 #  include <arpa/inet.h>
 # endif
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <unistd.h>
 #endif
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <time.h>
 
 #include <event2/event.h>
 // #include <event2/util.h>
@@ -38,7 +41,7 @@ static void gettimeofday_cb(int nothing, short int which, void *ev)
     localtime_r(&rawtime, &local_snapshot); // POSIX
 #endif
 
-    strftime(g_clock, sizeof(g_clock), "%d/%m/%YT%T", &local_snapshot);
+    strftime(g_clock, sizeof(g_clock), "%d/%m/%Y %T", &local_snapshot);
 
     evtimer_add(ev, &TIMER_TV);
 }
@@ -60,11 +63,12 @@ static void udp_cb(const int sock, short int which, void *arg)
 
     printf("[udp_cb] client said: %s\n", buf);
 
+    size = strlen(g_clock);
     /* Copy the time into buf; note, endianess unspecified! */
-    memcpy(buf, g_clock, strlen(g_clock));
+    memcpy(buf, g_clock, size);
 
     /* Send the data back to the client */
-    if (sendto(sock, buf, (int)strlen(buf), 0, (struct sockaddr *) &server_sin, server_sz) == -1 ) {
+    if (sendto(sock, buf, size, 0, (struct sockaddr *) &server_sin, server_sz) == -1 ) {
         perror("sendto()");
         event_base_loopbreak(base);
     }
