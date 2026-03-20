@@ -28,7 +28,7 @@ endif()
 
 project(hello-vs-llvm)
 
-add_executable(${PROJECT_NAME} hello.cpp ../ReadMe.txt)
+add_executable(${PROJECT_NAME} hello.cpp ../ReadMe.md)
 # "C:\WINDOWS\system32\cl : Command line warning D9025: overriding '/W3' with '/W4'"
 if(NOT CMAKE_GENERATOR STREQUAL "Ninja")
     target_compile_options(${PROJECT_NAME} PRIVATE "$<$<NOT:$<CONFIG:DEBUG>>:-W4>")

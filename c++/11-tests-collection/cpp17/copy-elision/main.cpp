@@ -7,6 +7,7 @@
 TEST(test_sample, test1)
 {
     const auto largeNonMovableObj = make();
+    ASSERT_TRUE(largeNonMovableObj.arr.size() > 30);
     std::cout << "Value 29: " << largeNonMovableObj.arr.at(29) << '.' << std::endl;
     ASSERT_TRUE(42 == largeNonMovableObj.arr.at(29));
     ASSERT_TRUE(42 == largeNonMovableObj.arr.at(61));

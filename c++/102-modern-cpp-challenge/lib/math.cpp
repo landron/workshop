@@ -7,6 +7,7 @@
 #include <cmath>
 #include <set>
 #include <vector>
+#include <algorithm>
 
 using namespace math_lib;
 
