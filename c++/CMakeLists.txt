@@ -1,3 +1,6 @@
+#[[
+    ccmake --build . --clean-first --verbose
+]]
 cmake_minimum_required(VERSION 3.21...3.30)
 
 if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)

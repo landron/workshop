@@ -21,6 +21,7 @@
     Knowledge base
         * CMake GUI: "Delete cache" after defining VCPKG_ROOT
     ]]
+
 # The first number (3.21) is your floor. It says: "This project requires at least CMake 3.21 to compile."
 # "If the user has a version as new as 3.30, please use the modern, updated logic for that version."
 cmake_minimum_required(VERSION 3.21...3.30)
@@ -32,15 +33,27 @@ if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     set(CMAKE_TOOLCHAIN_FILE "${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE FILEPATH "")
 endif()
 
-set(CMAKE_CXX_STANDARD 23) 
-# set(CMAKE_CXX_STANDARD 14) # try 14 for this test
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
 project(copy-elision)
-
-find_package(GTest MODULE REQUIRED)
-
 add_executable(${PROJECT_NAME} main.cpp NonMoveable.h)
-# it also adds include path
-target_link_libraries(${PROJECT_NAME} PRIVATE GTest::GTest GTest::Main)
+
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    # CXX_STANDARD 14 # try 14 for this test
+    CXX_STANDARD 23
+    CXX_STANDARD_REQUIRED YES
+    CXX_EXTENSIONS NO
+)
+
+get_target_property(TARGET_STD ${PROJECT_NAME} CXX_STANDARD)
+message(STATUS "TARGET_STD=${TARGET_STD}")
+if(TARGET_STD EQUAL 14)
+    target_compile_options(${PROJECT_NAME} PRIVATE
+        $<$<CXX_COMPILER_ID:GNU>:-fno-elide-constructors>
+        $<$<CXX_COMPILER_ID:Clang>:-fno-elide-constructors>
+    )
+    target_compile_definitions(${PROJECT_NAME} PRIVATE TEST_CPP_14=1)
+else() 
+    # it forces C++17
+    find_package(GTest MODULE REQUIRED)
+    # it also adds include path
+    target_link_libraries(${PROJECT_NAME} PRIVATE GTest::GTest GTest::Main)
+endif()
