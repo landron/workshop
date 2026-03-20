@@ -21,10 +21,13 @@ endif()
 
 project(hello-vs-llvm-vcpkg)
 
+add_executable(${PROJECT_NAME} hello.cpp ../ReadMe.md)
+
 # must be after project declaration
 find_package(SQLite3 REQUIRED)
+target_include_directories(${PROJECT_NAME} PRIVATE ${SQLite3_INCLUDE_DIR})
+target_link_libraries(${PROJECT_NAME} ${SQLite3_LIBRARY})
 
-add_executable(${PROJECT_NAME} hello.cpp ../ReadMe.md)
 # "C:\WINDOWS\system32\cl : Command line warning D9025: overriding '/W3' with '/W4'"
 if(NOT CMAKE_GENERATOR STREQUAL "Ninja")
     target_compile_options(${PROJECT_NAME} PRIVATE "$<$<NOT:$<CONFIG:DEBUG>>:-W4>")
@@ -35,5 +38,3 @@ endif()
 
 file(RELATIVE_PATH SUBFOLDER ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 target_compile_definitions(${PROJECT_NAME} PRIVATE SUBFOLDER="${SUBFOLDER}")
-
-target_link_libraries(${PROJECT_NAME} sqlite3)
