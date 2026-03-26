@@ -11,7 +11,8 @@
 
             // Adjust the path to your executable
             // "program": "${workspaceFolder}/build/bin/hello-vs-llvm-vcpkg", 
-            "program": "${workspaceFolder}/build/bin/copy-elision",
+            "program": "${workspaceFolder}/build/bin/modern-cpp-sandbox",
+
             // CMake: Set Launch/Debug Target in VS Code
             // "program": "${command:cmake.launchTargetPath}",
 

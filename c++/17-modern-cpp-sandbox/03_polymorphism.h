@@ -35,7 +35,7 @@ TEST(PolymorphismTest, CompareMemoryLayout) {
     // Vector of Objects: Objects are side-by-side (Contiguous)
     std::vector<FlatCircle> flat_circles;
 
-    for (int i = 0; i < count; ++i) {
+    for (auto i = 0; i < count; ++i) {
         shapes.push_back(std::make_unique<Circle>(i));
         flat_circles.push_back(FlatCircle{i});
     }

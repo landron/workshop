@@ -6,6 +6,8 @@
 
 	with build folder outside this repository, you can do:
 		cmake -G Ninja ../workshop/c++/03-test-main/
+
+	Use: C++ Coding Assessments #test
 ]]
 
 # The first number (3.21) is your floor. It says: "This project requires at least CMake 3.21 to compile."
