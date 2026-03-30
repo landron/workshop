@@ -4,7 +4,7 @@
 
 # The first number (3.21) is your floor. It says: "This project requires at least CMake 3.21 to compile."
 # "If the user has a version as new as 3.30, please use the modern, updated logic for that version."
-cmake_minimum_required(VERSION 3.21...3.30)
+cmake_minimum_required(VERSION 3.21...4.2)
 
 # https://vcpkg.readthedocs.io/en/latest/users/integration/
 if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
