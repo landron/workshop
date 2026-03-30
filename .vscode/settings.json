@@ -13,7 +13,7 @@
     //        }
     //    },
     "cmake.configureSettings": {
-        "CMAKE_TOOLCHAIN_FILE": "/home/livio/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"
+        "CMAKE_TOOLCHAIN_FILE": "~/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"
     }, 
 
     // This only affects editor parsing, not the build

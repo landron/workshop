@@ -12,7 +12,7 @@
 
 # The first number (3.21) is your floor. It says: "This project requires at least CMake 3.21 to compile."
 # "If the user has a version as new as 3.30, please use the modern, updated logic for that version."
-cmake_minimum_required(VERSION 3.21...3.30)
+cmake_minimum_required(VERSION 3.21...4.2)
 
 # C++20 was a "Major" release (like C++11). It fundamentally changed how we write C++ architecture. 
 # C++23, by comparison, is a "Minor" refinement
@@ -26,7 +26,7 @@ add_executable(${PROJECT_NAME} test.cpp)
 
 # Enable common warnings - vital for troubleshooting performance/bugs
 if(MSVC)
-    target_compile_options(simple-test PRIVATE /W4 /WX)
+    target_compile_options(${PROJECT_NAME} PRIVATE /W4 /WX)
 else()
-    target_compile_options(simple-test PRIVATE -Wall -Wextra -Wpedantic -Werror)
+    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror)
 endif()
