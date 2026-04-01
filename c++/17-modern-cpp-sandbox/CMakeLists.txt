@@ -15,7 +15,7 @@ project(modern-cpp-sandbox)
 add_executable(
     ${PROJECT_NAME}
 	main.cpp 
-    01_std_span.h 02_alignment.h 03_polymorphism.h 04_shared_ptr.h
+    01_std_span.h 02_alignment.h 03_polymorphism.h 04_shared_weak_ptr.h 05_slicing_and_variants.h
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

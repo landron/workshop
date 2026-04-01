@@ -1,6 +1,8 @@
 {
     // This is also defining ./build as build folder
-    "cmake.sourceDirectory": "/home/livio/Documents/Code/workshop/c++",
+    // "cmake.sourceDirectory": "/home/livio/Documents/Code/workshop/c++",
+    "cmake.sourceDirectory": "/home/livio/Documents/Code/workshop/c++/17-modern-cpp-sandbox",
+
     "cmake.generator": "Ninja",
 
     // unavoidable for the cmake tools extension to work: CMake/Build terminal is not bash

@@ -65,7 +65,7 @@ TEST(PolymorphismTest, CompareMemoryLayout) {
         static_assert(sizeof(shapes[0]) == 8, "This only fails in VS Code's broken IntelliSense");
     }
 #endif
-    std::println("Actual size of shapes[0] (unique_ptr<Shape>): {}", sizeof(shapes[0]));
+    // std::println("Actual size of shapes[0] (unique_ptr<Shape>): {}", sizeof(shapes[0]));
 
     static_assert(sizeof(int) == 4, "Expected int size to be 4 bytes");
     // The pointer vector stores 8-byte addresses. The flat vector stores 4-byte ints.
