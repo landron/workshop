@@ -133,7 +133,7 @@ TEST(SharedPtrTest, WeakCountTracksRequests) {
     ASSERT_TRUE(static_cast<bool>(tile));
     EXPECT_EQ(tile->get_weak_count(), 1u);
 
-    registry.get_tile(3, 4);
+    auto unused = registry.get_tile(3, 4);
     EXPECT_EQ(tile->get_weak_count(), 2u);
 }
 
@@ -159,4 +159,29 @@ TEST(SharedPtrTest, RealUse) {
     registry.reset();
     ASSERT_EQ(tile.use_count(), 0);
     ASSERT_TRUE(tile.expired());
+}
+
+// https://gemini.google.com added
+TEST(MapEditorTest, SharedOwnershipLogic) {
+    Registry global_registry;
+    
+    {
+        // 1. Create a layer and load a tile
+        Layer weather_layer(Layer::Type::Weather, global_registry);
+        weather_layer.load_tile(10, 10);
+        
+        // At this point, the Registry has 1 shared_ptr.
+        // We can verify this by getting a temporary shared_ptr from the registry.
+        auto tile_ptr = global_registry.get_tile(10, 10).lock();
+        
+        // Count = 1 (Registry) + 1 (This temporary tile_ptr)
+        // Note: The Layer's weak_ptr does NOT increment use_count.
+        EXPECT_EQ(tile_ptr.use_count(), 2);
+        EXPECT_EQ(tile_ptr->get_weak_count(), 2); // Your manual counter
+    } 
+    // weather_layer destroyed. Manual weak_count should decrement.
+    
+    auto tile_ptr_after = global_registry.get_tile(10, 10).lock();
+    EXPECT_EQ(tile_ptr_after.use_count(), 2); 
+    // (1 from registry, 1 from tile_ptr_after)
 }
