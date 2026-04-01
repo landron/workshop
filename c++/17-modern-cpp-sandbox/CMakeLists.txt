@@ -12,7 +12,11 @@ if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
 endif()
 
 project(modern-cpp-sandbox)
-add_executable(${PROJECT_NAME} main.cpp 01_std_span.h 02_alignment.h 03_polymorphism.h)
+add_executable(
+    ${PROJECT_NAME}
+	main.cpp 
+    01_std_span.h 02_alignment.h 03_polymorphism.h 04_shared_ptr.h
+)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     CXX_STANDARD 23
