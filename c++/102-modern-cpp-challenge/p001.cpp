@@ -1,10 +1,12 @@
 /*
     BigInteger vs int
 */
-#include "gtest/gtest.h"
-#include "problems.h"
-
 #include <iostream>
+
+// vcpkg providing gtest => #include <gtest/gtest.h> is the right choice.
+#include <gtest/gtest.h>
+
+#include "problems.h"
 
 namespace {
 

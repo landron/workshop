@@ -1,7 +1,8 @@
 #include <iostream>
 
 #ifndef TEST_CPP_14
-#include "gtest/gtest.h"
+// vcpkg providing gtest => #include <gtest/gtest.h> is the right choice.
+#include <gtest/gtest.h>
 #else
 #include <cassert>
 #define ASSERT_TRUE(expr) assert(expr)

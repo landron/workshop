@@ -7,7 +7,8 @@
 #include <memory>
 #include <string_view>
 
-#include "gtest/gtest.h"
+// vcpkg providing gtest => #include <gtest/gtest.h> is the right choice.
+#include <gtest/gtest.h>
 
 // A minimal Tile object with an illustrative weak reference counter.
 class Tile final {

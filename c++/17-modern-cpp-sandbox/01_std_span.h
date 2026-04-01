@@ -10,7 +10,8 @@ It is safer and zero-cost.
 #include <array>
 #include <span>
 
-#include "gtest/gtest.h"
+// vcpkg providing gtest => #include <gtest/gtest.h> is the right choice.
+#include <gtest/gtest.h>
 
 std::string to_string(std::span<const int> data) {
 // std::string to_string(std::vector<int> data) {

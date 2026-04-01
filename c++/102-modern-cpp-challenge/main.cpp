@@ -6,7 +6,9 @@
 */
 #include <iostream>
 
-#include "gtest/gtest.h"
+// vcpkg providing gtest => #include <gtest/gtest.h> is the right choice.
+#include <gtest/gtest.h>
+
 #include "problems.h"
 #include "lib/measure.h"
 

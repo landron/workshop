@@ -4,10 +4,12 @@
 
     Learnt: constexpr, std::accumulate
 */
-#include "gtest/gtest.h"
-#include "problems.h"
-
 #include <numeric>
+
+// vcpkg providing gtest => #include <gtest/gtest.h> is the right choice.
+#include <gtest/gtest.h>
+
+#include "problems.h"
 
 static
 constexpr unsigned get_greatest_common_divisor(unsigned a, unsigned b)

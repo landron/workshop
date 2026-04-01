@@ -41,7 +41,7 @@
 
         * VC Code integration on Linux: see https://code.visualstudio.com/docs/cpp/cmake-linux
     ]]
-cmake_minimum_required(VERSION 3.21...3.30)
+cmake_minimum_required(VERSION 3.21...4.2)
 
 #
 #   vcpkg
@@ -57,7 +57,7 @@ endif()
 #   build type: -DCMAKE_BUILD_TYPE=Release/Debug/RelWithDebInfo/MinSizeRel
 #       see CMakeCache.txt
 #
-message(CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE})
+# message(CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE})
 #message(CMAKE_CONFIGURATION_TYPES=${CMAKE_CONFIGURATION_TYPES})
 
 #

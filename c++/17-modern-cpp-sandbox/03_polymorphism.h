@@ -5,7 +5,8 @@
 #include <numeric>
 #include <cstdint>
 
-#include "gtest/gtest.h"
+// vcpkg providing gtest => #include <gtest/gtest.h> is the right choice.
+#include <gtest/gtest.h>
 
 // 1. The Polymorphic Approach (Slower)
 class Shape {
@@ -41,9 +42,31 @@ TEST(PolymorphismTest, CompareMemoryLayout) {
     }
 
     // TEST 1: Size of the container elements
+#ifndef __INTELLISENSE__
+    /*
+        That’s a classic Empty Base Optimization (EBO) failure in the IntelliSense engine.
+
+        Why this happened (Technical Reason)
+            std::unique_ptr is defined roughly like this:
+
+            template<typename T, typename Deleter = std::default_delete<T>>
+            class unique_ptr {
+                T* ptr;
+                Deleter del; // This is an empty class
+            };
+
+            Real GCC: Sees Deleter is empty and uses EBO to make it occupy 0 bytes. Total = 8 bytes.
+
+            IntelliSense: Sometimes fails the EBO check on specific Standard Library 
+            implementations (like your GCC 15.2 headers), assigning 8 bytes to the pointer + 
+            padding/size for the "empty" deleter. Total = 16 bytes.
+    */
     if constexpr (sizeof(void*) == 8) {
-        static_assert(sizeof(shapes[0]) == 8, "TODO: it fails in VSCode’s IntelliSense");
+        static_assert(sizeof(shapes[0]) == 8, "This only fails in VS Code's broken IntelliSense");
     }
+#endif
+    std::println("Actual size of shapes[0] (unique_ptr<Shape>): {}", sizeof(shapes[0]));
+
     static_assert(sizeof(int) == 4, "Expected int size to be 4 bytes");
     // The pointer vector stores 8-byte addresses. The flat vector stores 4-byte ints.
     EXPECT_EQ(sizeof(shapes[0]), sizeof(void*)); // Size of unique_ptr<Shape> 
