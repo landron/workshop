@@ -1,6 +1,6 @@
 #pragma once
 
-#include "lib/math.h"
+#include "lib/my_math.h"
 
 namespace modern_cpp_challenge
 {

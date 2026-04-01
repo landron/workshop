@@ -1,3 +1,4 @@
+// Not math.h: avoid conflict with the C standard library header
 #pragma once
 
 #include <utility>

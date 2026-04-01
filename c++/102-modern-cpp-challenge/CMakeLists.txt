@@ -1,4 +1,7 @@
 #[[
+    cmake -G Ninja ../../workshop/c++/102-modern-cpp-challenge
+
+
     Commands
         VsDevCmd.bat -arch=amd64
         cd F:\_Devel\build\modern-cpp-challenge-cmd
@@ -69,7 +72,7 @@ project(modern-cpp-challenge)
 
 find_package(GTest MODULE REQUIRED)
 
-set(sources main.cpp problems.h lib/math.h lib/math.cpp lib/utils.h lib/utils.cpp)
+set(sources main.cpp problems.h lib/my_math.h lib/math.cpp lib/utils.h lib/utils.cpp)
 file(GLOB_RECURSE PROBLEM_FILES "${PROJECT_SOURCE_DIR}/p*.cpp")
 set(sources ${sources} ${PROBLEM_FILES})
 add_executable(${PROJECT_NAME} ${sources})
