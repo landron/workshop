@@ -35,8 +35,9 @@ TEST(SharedPtrNoWeakPtrTest, CircularSharedPtrDoubleLinkedListKeepsNodesAlive) {
     EXPECT_EQ(a.use_count(), 2u);
     EXPECT_EQ(b.use_count(), 2u);
 
-    auto weak_a = std::weak_ptr<DoubleLinkedNode>(a);
-    auto weak_b = std::weak_ptr<DoubleLinkedNode>(b);
+    // CTAD (Compile-Time Argument Deduction) available since C++17
+    std::weak_ptr weak_a = a;
+    std::weak_ptr weak_b = b;
 
     a.reset();
     b.reset();
@@ -61,6 +62,8 @@ struct DoubleLinkedNodeWithWeakPrev final {
     std::shared_ptr<DoubleLinkedNodeWithWeakPrev> next;
     std::weak_ptr<DoubleLinkedNodeWithWeakPrev> prev;
 
+    // In a production environment, you'd use AddressSanitizer (ASan) 
+    // to catch these leaks automatically without the extra code.
     inline static int destructor_count = 0;
 
     explicit DoubleLinkedNodeWithWeakPrev(int value) noexcept
@@ -83,8 +86,8 @@ TEST(SharedPtrWithWeakPtrTest, DoublyLinkedListBreaksCycleWithWeakPrev) {
     ASSERT_EQ(a.use_count(), 1u);
     ASSERT_EQ(b.use_count(), 2u);
 
-    auto weak_a = std::weak_ptr<DoubleLinkedNodeWithWeakPrev>(a);
-    auto weak_b = std::weak_ptr<DoubleLinkedNodeWithWeakPrev>(b);
+    std::weak_ptr weak_a = a;
+    std::weak_ptr weak_b = b;
 
     a.reset();
     ASSERT_TRUE(weak_a.expired())
