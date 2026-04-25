@@ -1,11 +1,12 @@
 /*
     tag_copy_elision
     tag_nrvo
-        This variant of copy elision is known as NRVO, "named return value optimization".
+        This variant of copy elision is known as NRVO, "named return value
+   optimization".
 
-        "Unfortunately, in C++17 we’ll get copy elision only for temporary objects, not for Named RVO 
-        (so it covers only the first point, not for Named Return Value Optimization)"
-        (see make_2)
+        "Unfortunately, in C++17 we’ll get copy elision only for temporary
+   objects, not for Named RVO (so it covers only the first point, not for Named
+   Return Value Optimization)" (see make_2)
 
     Reference
         https://www.bfilipek.com/2017/06/cpp17-details-clarifications.html#guaranteed-copy-elision
@@ -16,8 +17,7 @@
 
 #include <array>
 
-struct NonMoveable
-{
+struct NonMoveable {
     NonMoveable(int);
     // no copy or move constructor:
     NonMoveable(const NonMoveable&) = delete;
@@ -26,24 +26,24 @@ struct NonMoveable
     std::array<int, 1024> arr;
 };
 
-NonMoveable::NonMoveable(int init) 
-{
+NonMoveable::NonMoveable(int init) {
     arr.fill(init);
 }
 
 /*
-    C++ 14: 
-        error C2280: 'NonMoveable::NonMoveable(NonMoveable &&)': attempting to reference a deleted function
+    C++ 14:
+        error C2280: 'NonMoveable::NonMoveable(NonMoveable &&)': attempting to
+   reference a deleted function
 */
-NonMoveable make()
-{
+NonMoveable make() {
     return NonMoveable(42);
 }
 
-/*  
+/*
     Visual Studio Community 2017
     C++ 20:
-        error C2280: 'NonMoveable::NonMoveable(NonMoveable &&)': attempting to reference a deleted function
+        error C2280: 'NonMoveable::NonMoveable(NonMoveable &&)': attempting to
+   reference a deleted function
 */
 #if 0
 NonMoveable make_2()

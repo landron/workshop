@@ -1,22 +1,24 @@
 /*
-1. Use std::span<const T> for read-only functions. It is the modern replacement for (const T* ptr, size_t len). 
-It is safer and zero-cost.
-2. std::string stores its data on the heap (unless it's very short, known as Small String Optimization or SSO).
+1. Use std::span<const T> for read-only functions. It is the modern replacement
+for (const T* ptr, size_t len). It is safer and zero-cost.
+2. std::string stores its data on the heap (unless it's very short, known as
+Small String Optimization or SSO).
 */
 #pragma once
 
-#include <print>
-#include <vector>
 #include <array>
+#include <print>
 #include <span>
+#include <vector>
 
 // vcpkg providing gtest => #include <gtest/gtest.h> is the right choice.
 #include <gtest/gtest.h>
 
 std::string to_string(std::span<const int> data) {
-// std::string to_string(std::vector<int> data) {
+    // std::string to_string(std::vector<int> data) {
     std::string result;
-    result.reserve(data.size() * 4); // Guessing ~4 chars per int to avoid reallocations
+    // Guessing ~4 chars per int to avoid reallocations
+    result.reserve(data.size() * 4);
 
     for (const auto& val : data) {
         // result += std::format("{}", val);

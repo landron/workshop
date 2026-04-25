@@ -14,8 +14,7 @@ struct DoubleLinkedNode final {
 
     inline static int destructor_count = 0;
 
-    explicit DoubleLinkedNode(int value) noexcept
-        : value(value) {}
+    explicit DoubleLinkedNode(int value) noexcept : value(value) {}
 
     ~DoubleLinkedNode() noexcept {
         ++destructor_count;
@@ -42,8 +41,9 @@ TEST(SharedPtrNoWeakPtrTest, CircularSharedPtrDoubleLinkedListKeepsNodesAlive) {
     a.reset();
     b.reset();
 
-    EXPECT_EQ(DoubleLinkedNode::destructor_count, 0) 
-        << "Nodes should not be destroyed due to circular shared_ptr references";
+    EXPECT_EQ(DoubleLinkedNode::destructor_count, 0)
+        << "Nodes should not be destroyed due to circular shared_ptr "
+           "references";
     EXPECT_FALSE(weak_a.expired())
         << "Weak pointer not expired since node is still alive after reset()";
     EXPECT_FALSE(weak_b.expired());
@@ -62,12 +62,11 @@ struct DoubleLinkedNodeWithWeakPrev final {
     std::shared_ptr<DoubleLinkedNodeWithWeakPrev> next;
     std::weak_ptr<DoubleLinkedNodeWithWeakPrev> prev;
 
-    // In a production environment, you'd use AddressSanitizer (ASan) 
+    // In a production environment, you'd use AddressSanitizer (ASan)
     // to catch these leaks automatically without the extra code.
     inline static int destructor_count = 0;
 
-    explicit DoubleLinkedNodeWithWeakPrev(int value) noexcept
-        : value(value) {}
+    explicit DoubleLinkedNodeWithWeakPrev(int value) noexcept : value(value) {}
 
     ~DoubleLinkedNodeWithWeakPrev() noexcept {
         ++destructor_count;
@@ -90,8 +89,8 @@ TEST(SharedPtrWithWeakPtrTest, DoublyLinkedListBreaksCycleWithWeakPrev) {
     std::weak_ptr weak_b = b;
 
     a.reset();
-    ASSERT_TRUE(weak_a.expired())
-        << "Weak prev does not keep node alive after owning shared_ptr is released";
+    ASSERT_TRUE(weak_a.expired()) << "Weak prev does not keep node alive after "
+                                     "owning shared_ptr is released";
     EXPECT_EQ(DoubleLinkedNodeWithWeakPrev::destructor_count, 1);
 
     b.reset();

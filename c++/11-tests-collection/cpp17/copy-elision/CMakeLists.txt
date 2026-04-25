@@ -38,7 +38,7 @@ add_executable(${PROJECT_NAME} main.cpp NonMoveable.h)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     # CXX_STANDARD 14 # try 14 for this test
-    CXX_STANDARD 23
+    CXX_STANDARD 26
     CXX_STANDARD_REQUIRED YES
     CXX_EXTENSIONS NO
 )

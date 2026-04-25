@@ -3,8 +3,8 @@
     P5: sexy prime pairs up to a limit
         "Sexy primes are prime numbers that differ from each other by 6.""
 */
-#include <gtest/gtest.h>
 #include "problems.h"
+#include <gtest/gtest.h>
 
 #include <cassert>
 #include <cmath>
@@ -24,22 +24,17 @@ using BigInteger = modern_cpp_challenge::BigInteger;
 
         also in proj_euler.py
 */
-bool is_prime(BigInteger number)
-{
+bool is_prime(BigInteger number) {
     assert(number > 0);
 
-    if (number < 4)
-        return number != 1;
-    if (number%2 == 0)
-        return false;
-    if (number%3 == 0)
-        return false;
+    if (number < 4) return number != 1;
+    if (number % 2 == 0) return false;
+    if (number % 3 == 0) return false;
 
     const auto limit = 1 + std::floor(std::sqrt(number));
     unsigned step = 2;
-    for (BigInteger i = 5; i < limit; i += step, step = 6-step)
-        if (number%i == 0)
-            return false;
+    for (BigInteger i = 5; i < limit; i += step, step = 6 - step)
+        if (number % i == 0) return false;
 
     return true;
 }
@@ -48,37 +43,32 @@ bool is_prime(BigInteger number)
     O(n*n), theoretically, but prime numbers are dense enough for usual numbers
         so more like a O(n)
 */
-BigInteger largest_prime_smaller_than(BigInteger number)
-{
+BigInteger largest_prime_smaller_than(BigInteger number) {
     assert(number > 2 && "condition to have a solution");
     if (number <= 2)
         throw std::out_of_range("Number outside the range: too small!");
 
     --number;
-    for (;!is_prime(number); --number);
+    for (; !is_prime(number); --number)
+        ;
     return number;
 }
 
-size_t sexy_primes_pairs(BigInteger limit, bool print_them = false)
-{
+size_t sexy_primes_pairs(BigInteger limit, bool print_them = false) {
     size_t count = 0;
-    for (BigInteger i = 5; i < limit-6; ++i)
-    {
-        if (is_prime(i) && is_prime(i+6))
-        {
-            ++ count;
+    for (BigInteger i = 5; i < limit - 6; ++i) {
+        if (is_prime(i) && is_prime(i + 6)) {
+            ++count;
             if (print_them)
-                std::cout << count << ": " << i << " " << i+6 << std::endl;
+                std::cout << count << ": " << i << " " << i + 6 << std::endl;
         }
     }
     return count;
 }
 
-};
+}; // namespace
 
-
-TEST(test_p04, main)
-{
+TEST(test_p04, main) {
     ASSERT_TRUE(!is_prime(1));
     ASSERT_TRUE(is_prime(2));
     ASSERT_TRUE(!is_prime(6));
@@ -99,13 +89,13 @@ TEST(test_p04, main)
     ASSERT_EQ(997, largest_prime_smaller_than(1000));
 }
 
-TEST(test_p05, main)
-{
+TEST(test_p05, main) {
     ASSERT_EQ(0, sexy_primes_pairs(11));
     ASSERT_EQ(1, sexy_primes_pairs(12));
     ASSERT_EQ(2, sexy_primes_pairs(14));
     ASSERT_EQ(4, sexy_primes_pairs(20));
 
     if (0)
-    std::cout << "Found " << sexy_primes_pairs(102, true) << " sexy prime pairs." << std::endl;
+        std::cout << "Found " << sexy_primes_pairs(102, true)
+                  << " sexy prime pairs." << std::endl;
 }

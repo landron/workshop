@@ -3,6 +3,7 @@
 # all files starting with . except .gitignore
 .*
 !.gitignore
+!.clang-format
 
 # macOS: XCode
 xcuserdata*/

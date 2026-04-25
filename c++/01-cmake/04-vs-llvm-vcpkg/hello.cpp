@@ -1,8 +1,8 @@
 #include <print>
 #include <sqlite3.h>
 
-int main()
-{
+int main() {
     const auto id = SUBFOLDER;
-    std::print("Hello, world, from {}!\nSQLite version: {}\n", id, sqlite3_libversion());
+    std::print("Hello, world, from {}!\nSQLite version: {}\n", id,
+               sqlite3_libversion());
 }

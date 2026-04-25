@@ -1,22 +1,26 @@
 #pragma once
 
 #include <gtest/gtest.h>
-#include <vector>
 #include <variant>
+#include <vector>
 
 struct Base {
     const int id;
     explicit Base(int i) : id(i) {}
     virtual ~Base() = default;
-    
-    virtual int getValue() const { return id; }
+
+    virtual int getValue() const {
+        return id;
+    }
 };
 
 struct Derived : public Base {
     const int extra;
     Derived(int i, int e) : Base{i}, extra(e) {}
-    
-    int getValue() const override { return id + extra; }
+
+    int getValue() const override {
+        return id + extra;
+    }
 };
 
 TEST(ModernCpp, ObjectSlicing) {
@@ -24,12 +28,12 @@ TEST(ModernCpp, ObjectSlicing) {
     // A vector of Base objects (not pointers).
     std::vector<Base> sliced_vector;
 
-    Derived d(10, 5); // getValue() should return 15
+    Derived d(10, 5);           // getValue() should return 15
     sliced_vector.push_back(d); // PROBLEM: Slicing happens here!
 
-    // The 'extra' member is chopped off because the vector only allocated 
+    // The 'extra' member is chopped off because the vector only allocated
     // enough space for 'Base'. The VTable is also reset to 'Base'.
-    EXPECT_EQ(sliced_vector[0].getValue(), 10); 
+    EXPECT_EQ(sliced_vector[0].getValue(), 10);
     EXPECT_NE(sliced_vector[0].getValue(), 15);
     EXPECT_EQ(sizeof(sliced_vector[0]), sizeof(Base));
 }
@@ -51,4 +55,3 @@ TEST(ModernCpp, VariantSolution) {
 
     EXPECT_EQ(total, 25); // 10 from Base + 15 from Derived. NO SLICING!
 }
-

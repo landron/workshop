@@ -1,12 +1,15 @@
 #[[
     cmake --build . --clean-first --verbose
 
+    ninja 
+    ninja format
+
 It might needed latest Ninja:
 * Ninja 1.13.2 (Manjaro repo version) has a dyndep bug: it can crash with Assertion 'edge && !edge->outputs_ready()' 
     failed when building C++20/23 modules (or certain advanced C++ features like module-mapper or precompiled headers).
 * Latest Ninja (1.14+ / master branch) fixes this bug.
 ]]
-cmake_minimum_required(VERSION 3.21...3.30)
+cmake_minimum_required(VERSION 3.21...4.2)
 
 if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE FILEPATH "")
@@ -30,4 +33,20 @@ add_subdirectory(03-test-main)
 add_subdirectory(04-test-main-c)
 add_subdirectory(11-tests-collection/cpp17/copy-elision)
 add_subdirectory(17-modern-cpp-sandbox)
+add_subdirectory(23-hft)
 add_subdirectory(102-modern-cpp-challenge)
+
+find_program(CLANG_FORMAT "clang-format")
+
+if(CLANG_FORMAT)
+    # Get all project source files
+    file(GLOB_RECURSE ALL_SOURCE_FILES *.cpp *.h *.hpp *.cc)
+
+    add_custom_target(format
+        # -style=file:${CMAKE_SOURCE_DIR}/.clang-format
+        COMMAND ${CLANG_FORMAT} -i ${ALL_SOURCE_FILES}
+        COMMENT "Formatting code with clang-format"
+    )
+else()
+    message(WARNING "clang-format not found. 'format' target will not be available.")
+endif()
