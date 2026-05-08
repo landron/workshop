@@ -5,7 +5,7 @@
 	* ninja
 
 	with build folder outside this repository, you can do:
-		cmake -G Ninja ../workshop/c++/03-test-main/
+		cmake -G Ninja ../../workshop/c++/03-test-main/
 
 	Use: C++ Coding Assessments #test
 ]]
@@ -16,7 +16,7 @@ cmake_minimum_required(VERSION 3.21...4.2)
 
 # C++20 was a "Major" release (like C++11). It fundamentally changed how we write C++ architecture. 
 # C++23, by comparison, is a "Minor" refinement
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 26)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
