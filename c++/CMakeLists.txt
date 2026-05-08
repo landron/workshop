@@ -1,8 +1,14 @@
 #[[
     cmake --build . --clean-first --verbose
+        cmake -G Ninja ../../mine/workshop/c++
 
     ninja 
     ninja format
+
+VS Code (for debugging, by example)
+    * .vscode/settings.json: cmake.sourceDirectory, cmake.generator,  
+        "cmake.configureSettings": {"CMAKE_TOOLCHAIN_FILE": <...>}, 
+    * .vscode/launch.json: program
 
 It might needed latest Ninja:
 * Ninja 1.13.2 (Manjaro repo version) has a dyndep bug: it can crash with Assertion 'edge && !edge->outputs_ready()' 

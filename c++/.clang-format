@@ -10,6 +10,7 @@ AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 AlwaysBreakTemplateDeclarations: Yes
 # needed for string arrays, but it packs everything
 BinPackArguments: true
+IndentWrappedFunctionNames: true
 PointerAlignment: Left
 
 # Optional: keep braces on the same line for classes/functions
