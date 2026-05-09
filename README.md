@@ -1,7 +1,7 @@
 # Workshop
 
 ## Dictionary of all the tags around (wip)
-   (they are all prefixed by tag_)
 
-   * nice
-   * howto, howto_java
+   * #howto, #howto_java
+   * #modern_cpp, #cpp26
+   

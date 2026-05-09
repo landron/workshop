@@ -9,7 +9,7 @@
     - java -ea A
             -ea = -enableassertions
 
-    tag_howto, tag_howto_java
+    #howto, #howto_java
 */
 
 import java.util.Arrays;
