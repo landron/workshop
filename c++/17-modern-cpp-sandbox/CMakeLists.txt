@@ -1,5 +1,5 @@
 #[[
-    cmake -G Ninja ../../workshop/c++/17-modern-cpp-sandbox/
+    cmake -G Ninja ../../mine/workshop/c++/17-modern-cpp-sandbox/
 ]]
 
 # The first number (3.21) is your floor. It says: "This project requires at least CMake 3.21 to compile."

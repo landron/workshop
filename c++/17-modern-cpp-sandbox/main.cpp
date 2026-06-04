@@ -7,3 +7,4 @@
 #include "04_shared_no_weak_ptr.h"
 #include "04_shared_weak_ptr.h"
 #include "05_slicing_and_variants.h"
+#include "06_std_integral.h"

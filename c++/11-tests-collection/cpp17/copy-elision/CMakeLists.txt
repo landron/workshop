@@ -44,7 +44,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 )
 
 get_target_property(TARGET_STD ${PROJECT_NAME} CXX_STANDARD)
-message(STATUS "TARGET_STD=${TARGET_STD}")
+# message(STATUS "TARGET_STD=${TARGET_STD}")
 if(TARGET_STD EQUAL 14)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:GNU>:-fno-elide-constructors>
