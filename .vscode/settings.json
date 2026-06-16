@@ -20,5 +20,10 @@
     // This only affects editor parsing, not the build
     "C_Cpp.default.defines": [
         "SUBFOLDER=\"${workspaceFolder}/path/to/subfolder\""
-    ]
+    ],
+
+    // This only affects editor parsing, not the build
+    "C_Cpp.files.exclude": {
+        "c++/11-tests-collection/cpp17/copy-elision/nrvo_fails.cpp": true
+    }
 }

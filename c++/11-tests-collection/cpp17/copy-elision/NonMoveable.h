@@ -4,7 +4,7 @@
         This variant of copy elision is known as NRVO, "named return value
    optimization".
 
-        "Unfortunately, in C++17 we’ll get copy elision only for temporary
+        "Unfortunately, in C++17 we'll get copy elision only for temporary
    objects, not for Named RVO (so it covers only the first point, not for Named
    Return Value Optimization)" (see make_2)
 
@@ -34,21 +34,12 @@ NonMoveable::NonMoveable(int init) {
     C++ 14:
         error C2280: 'NonMoveable::NonMoveable(NonMoveable &&)': attempting to
    reference a deleted function
+
+   C++ 17: No move or copy occurs by definition. The deleted move constructor is
+   completely ignored.
+   prvalue: pure rvalue (no memory address vs Rvalue: Any expression that can be
+   moved from.)
 */
 NonMoveable make() {
     return NonMoveable(42);
 }
-
-/*
-    Visual Studio Community 2017
-    C++ 20:
-        error C2280: 'NonMoveable::NonMoveable(NonMoveable &&)': attempting to
-   reference a deleted function
-*/
-#if 0
-NonMoveable make_2()
-{
-    auto obj = NonMoveable(42);
-    return obj;
-}
-#endif

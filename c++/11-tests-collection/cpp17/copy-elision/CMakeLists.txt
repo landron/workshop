@@ -1,5 +1,5 @@
 #[[
-    cmake -G Ninja ../../workshop/c++/11-tests-collection/cpp17/copy-elision/
+    cmake -G Ninja ../../mine/workshop/c++/11-tests-collection/cpp17/copy-elision/
 ]]
 #[[
     vcpkg install gtest
@@ -36,6 +36,9 @@ endif()
 project(copy-elision)
 add_executable(${PROJECT_NAME} main.cpp NonMoveable.h)
 
+# CTest to test C++ compilation guards
+enable_testing()
+
 set_target_properties(${PROJECT_NAME} PROPERTIES
     # CXX_STANDARD 14 # try 14 for this test
     CXX_STANDARD 26
@@ -57,3 +60,11 @@ else()
     # it also adds include path
     target_link_libraries(${PROJECT_NAME} PRIVATE GTest::GTest GTest::Main)
 endif()
+
+add_test(
+    NAME nrvo_should_fail
+    COMMAND ${CMAKE_CXX_COMPILER}
+            ${CMAKE_CURRENT_SOURCE_DIR}/nrvo_fails.cpp
+            -c
+)
+set_tests_properties(nrvo_should_fail PROPERTIES WILL_FAIL TRUE)
