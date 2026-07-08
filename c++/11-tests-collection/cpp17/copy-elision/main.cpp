@@ -18,8 +18,9 @@ int main()
 {
     const auto largeNonMovableObj = make();
     ASSERT_TRUE(largeNonMovableObj.arr.size() > 30);
-    std::cout << "Value 29: " << largeNonMovableObj.arr.at(29) << '.'
-              << std::endl;
-    ASSERT_TRUE(42 == largeNonMovableObj.arr.at(29));
-    ASSERT_TRUE(42 == largeNonMovableObj.arr.at(61));
+    constexpr auto index = 42;
+    std::cout << "Value " << index << ": " << largeNonMovableObj.arr.at(index)
+              << '.' << std::endl;
+    ASSERT_TRUE(29 == largeNonMovableObj.arr.at(29));
+    ASSERT_TRUE(29 == largeNonMovableObj.arr.at(61));
 }

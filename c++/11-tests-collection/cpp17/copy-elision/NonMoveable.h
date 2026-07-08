@@ -41,5 +41,5 @@ NonMoveable::NonMoveable(int init) {
    moved from.)
 */
 NonMoveable make() {
-    return NonMoveable(42);
+    return NonMoveable(29);
 }

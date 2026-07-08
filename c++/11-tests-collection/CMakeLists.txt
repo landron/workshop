@@ -1,5 +1,5 @@
 #[[
-    cmake -G Ninja ../../mine/workshop/c++/11-tests-collection/cpp17/copy-elision/
+    cmake -G Ninja ../../mine/workshop/c++/11-tests-collection
 ]]
 #[[
     vcpkg install gtest
@@ -34,7 +34,7 @@ if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
 endif()
 
 project(copy-elision)
-add_executable(${PROJECT_NAME} main.cpp NonMoveable.h)
+add_executable(${PROJECT_NAME} cpp17/copy-elision/main.cpp)
 
 # CTest to test C++ compilation guards
 enable_testing()
@@ -64,7 +64,11 @@ endif()
 add_test(
     NAME nrvo_should_fail
     COMMAND ${CMAKE_CXX_COMPILER}
-            ${CMAKE_CURRENT_SOURCE_DIR}/nrvo_fails.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/cpp17/copy-elision/nrvo_fails.cpp
             -c
 )
-set_tests_properties(nrvo_should_fail PROPERTIES WILL_FAIL TRUE)
+# set_tests_properties(nrvo_should_fail PROPERTIES WILL_FAIL TRUE)
+# The test passes ONLY if it fails due to the deleted move constructor
+set_tests_properties(nrvo_should_fail PROPERTIES 
+    PASS_REGULAR_EXPRESSION "attempting to reference a deleted function|use of deleted function"
+)
