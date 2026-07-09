@@ -62,6 +62,7 @@ else()
 endif()
 
 add_test(
+    # nrvo = Named Return Value Optimization
     NAME nrvo_should_fail
     COMMAND ${CMAKE_CXX_COMPILER}
             ${CMAKE_CURRENT_SOURCE_DIR}/cpp17/copy-elision/nrvo_fails.cpp

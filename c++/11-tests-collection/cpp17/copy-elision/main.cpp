@@ -1,3 +1,7 @@
+/*
+ninja
+./copy-elision
+*/
 #include <iostream>
 
 #ifndef TEST_CPP_14
