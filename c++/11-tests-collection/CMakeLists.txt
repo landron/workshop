@@ -1,5 +1,6 @@
 #[[
-    cmake -G Ninja ../../mine/workshop/c++/11-tests-collection
+    ../../mine/workshop/c++/11-tests-collection/run.sh
+        cmake -G Ninja ../../mine/workshop/c++/11-tests-collection
 ]]
 #[[
     vcpkg install gtest
@@ -33,11 +34,12 @@ if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     set(CMAKE_TOOLCHAIN_FILE "${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE FILEPATH "")
 endif()
 
-project(copy-elision)
-add_executable(${PROJECT_NAME} cpp17/copy-elision/main.cpp)
-
-# CTest to test C++ compilation guards
-enable_testing()
+project(cpp_tests)
+add_executable(
+    ${PROJECT_NAME} 
+    cpp17/copy-elision/main.cpp
+    01_slicing/protected/slice_tests.cpp
+)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     # CXX_STANDARD 14 # try 14 for this test
@@ -61,15 +63,5 @@ else()
     target_link_libraries(${PROJECT_NAME} PRIVATE GTest::GTest GTest::Main)
 endif()
 
-add_test(
-    # nrvo = Named Return Value Optimization
-    NAME nrvo_should_fail
-    COMMAND ${CMAKE_CXX_COMPILER}
-            ${CMAKE_CURRENT_SOURCE_DIR}/cpp17/copy-elision/nrvo_fails.cpp
-            -c
-)
-# set_tests_properties(nrvo_should_fail PROPERTIES WILL_FAIL TRUE)
-# The test passes ONLY if it fails due to the deleted move constructor
-set_tests_properties(nrvo_should_fail PROPERTIES 
-    PASS_REGULAR_EXPRESSION "attempting to reference a deleted function|use of deleted function"
-)
+enable_testing()
+include(Tests.cmake)

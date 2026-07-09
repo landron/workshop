@@ -1,6 +1,6 @@
 /*
 ninja
-./copy-elision
+./cpp_tests
 */
 #include <iostream>
 
@@ -15,7 +15,7 @@ ninja
 #include "NonMoveable.h"
 
 #ifndef TEST_CPP_14
-TEST(test_sample, test1)
+TEST(test_copy_elision, test1)
 #else
 int main()
 #endif
