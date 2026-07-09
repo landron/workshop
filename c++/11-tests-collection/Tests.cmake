@@ -58,3 +58,25 @@ add_test(
 set_tests_properties(slice_should_fail_4 PROPERTIES 
     PASS_REGULAR_EXPRESSION "is protected within this context|declared protected here"
 )
+
+# slicing protection 3: through deleted copy
+
+add_test(
+    NAME slice_should_fail_5
+    COMMAND ${CMAKE_CXX_COMPILER} -std=c++26
+            ${CMAKE_CURRENT_SOURCE_DIR}/01_slicing/03_deleted_copy/slice_fails_1.cpp
+            -c
+)
+set_tests_properties(slice_should_fail_5 PROPERTIES 
+    PASS_REGULAR_EXPRESSION "use of deleted function|declared deleted"
+)
+add_test(
+    NAME slice_should_fail_6
+    COMMAND ${CMAKE_CXX_COMPILER} -std=c++26
+            ${CMAKE_CURRENT_SOURCE_DIR}/01_slicing/03_deleted_copy/slice_fails_2.cpp
+            -c
+)
+set_tests_properties(slice_should_fail_6 PROPERTIES 
+    PASS_REGULAR_EXPRESSION "use of deleted function|declared deleted"
+)
+
