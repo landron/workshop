@@ -38,7 +38,8 @@ project(cpp_tests)
 add_executable(
     ${PROJECT_NAME} 
     cpp17/copy-elision/main.cpp
-    01_slicing/protected/slice_tests.cpp
+    01_slicing/01_protected_destructor/slice_tests.cpp
+    01_slicing/02_protected_copy/slice_tests.cpp
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

@@ -3,9 +3,7 @@ ctest -V
 */
 #include "Base.h"
 
-#include <gtest/gtest.h>
-
-TEST(test_slice, protected_destructor) {
+void no_slice_protected_destructor() {
     Derived d;
     sliceExample1(d);
 }

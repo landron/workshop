@@ -1,11 +1,17 @@
+/*
+    Solution 1: protected destructor in the base class
+    "You may inherit from me, but you may not own/delete me through a Base
+   interface."
+*/
 #pragma once
 
 #include <print>
 
 class Base {
   protected:
-    ~Base() =
-        default; // Forces compilation error on by-value destruction (slicing)
+    // Forces compilation error on by-value destruction (slicing)
+    ~Base() = default;
+
   public:
     virtual void speak() const {
         std::println("Base");
@@ -25,9 +31,13 @@ class Derived2 : public Derived {
         std::println("Derived 2");
     }
 
-    // Fails: Per C++ standard [class.protected], Derived2 can only access protected 
-    // members (like ~Base) on objects of its own type or further derived types. 
-    // It is barred from destroying a raw, standalone Base object.
+    static void sliceExample(Derived b) {
+        b.speak();
+    }
+
+    // OK: Unlike a free function, a member of a class derived from Base has
+    // access to Base's protected destructor, so this by-value parameter is
+    // legal.
     static void sliceExample(Base b) {
         b.speak();
     }
@@ -39,7 +49,8 @@ void sliceExample1(Base b) {
     b.speak();
 }
 
-// The destructor of 'Derived' is public
+// OK: Derived has a public destructor. Destroying the parameter calls
+// Derived::~Derived(), which is allowed to invoke Base::~Base().
 void sliceExample2(Derived b) {
     b.speak();
 }
