@@ -4,6 +4,6 @@ ctest -V
 #include "Base.h"
 
 void no_slice_protected_destructor() {
-    Derived d;
-    sliceExample1(d);
+    protected_destructor::Derived d;
+    protected_destructor::sliceExample1(d);
 }

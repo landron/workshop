@@ -7,6 +7,8 @@
 
 #include <print>
 
+namespace protected_destructor {
+
 class Base {
   protected:
     // Forces compilation error on by-value destruction (slicing)
@@ -59,3 +61,5 @@ void sliceExample2(Derived b) {
 void safeExample(const Base& b) {
     b.speak();
 }
+
+} // namespace protected_destructor
