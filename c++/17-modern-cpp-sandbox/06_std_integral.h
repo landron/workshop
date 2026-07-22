@@ -22,7 +22,7 @@ https://leetcode.com/problems/total-waviness-of-numbers-in-range-i
 
 #include <gtest/gtest.h>
 
-class Solution {
+class WavinessCalculator {
   public:
     template <std::integral T>
     [[nodiscard]] constexpr static T totalWaviness(T num1, T num2) {
@@ -67,29 +67,29 @@ class Solution {
 // -----------------------------------------------------------------------------
 
 TEST(TotalWavinessTest, SingleValueLessThanThreeDigits) {
-    EXPECT_EQ(Solution::totalWaviness(0, 0), 0);
-    EXPECT_EQ(Solution::totalWaviness(7, 11), 0);
-    EXPECT_EQ(Solution::totalWaviness(99, 100), 0);
+    EXPECT_EQ(WavinessCalculator::totalWaviness(0, 0), 0);
+    EXPECT_EQ(WavinessCalculator::totalWaviness(7, 11), 0);
+    EXPECT_EQ(WavinessCalculator::totalWaviness(99, 100), 0);
 }
 
 TEST(TotalWavinessTest, SinglePeak) {
-    EXPECT_EQ(Solution::totalWaviness(152, 152), 1);
-    EXPECT_EQ(Solution::totalWaviness(394, 394), 1);
+    EXPECT_EQ(WavinessCalculator::totalWaviness(152, 152), 1);
+    EXPECT_EQ(WavinessCalculator::totalWaviness(394, 394), 1);
 }
 
 TEST(TotalWavinessTest, SingleValley) {
-    EXPECT_EQ(Solution::totalWaviness(131, 131), 1);
-    EXPECT_EQ(Solution::totalWaviness(828, 828), 1);
+    EXPECT_EQ(WavinessCalculator::totalWaviness(131, 131), 1);
+    EXPECT_EQ(WavinessCalculator::totalWaviness(828, 828), 1);
 }
 
 TEST(TotalWavinessTest, MonotonicDigits) {
-    EXPECT_EQ(Solution::totalWaviness(12345, 12345), 0);
-    EXPECT_EQ(Solution::totalWaviness(98765, 98765), 0);
+    EXPECT_EQ(WavinessCalculator::totalWaviness(12345, 12345), 0);
+    EXPECT_EQ(WavinessCalculator::totalWaviness(98765, 98765), 0);
 }
 
 TEST(TotalWavinessTest, RepeatedDigits) {
-    EXPECT_EQ(Solution::totalWaviness(11111, 11111), 0);
-    EXPECT_EQ(Solution::totalWaviness(12221, 12221), 0);
+    EXPECT_EQ(WavinessCalculator::totalWaviness(11111, 11111), 0);
+    EXPECT_EQ(WavinessCalculator::totalWaviness(12221, 12221), 0);
 }
 
 TEST(TotalWavinessTest, MultipleExtrema) {
@@ -97,7 +97,7 @@ TEST(TotalWavinessTest, MultipleExtrema) {
     // 1-5-1 peak
     // 5-1-5 valley
     // 1-5-1 peak
-    EXPECT_EQ(Solution::totalWaviness(15151, 15151), 3);
+    EXPECT_EQ(WavinessCalculator::totalWaviness(15151, 15151), 3);
 }
 
 // -----------------------------------------------------------------------------
@@ -105,11 +105,11 @@ TEST(TotalWavinessTest, MultipleExtrema) {
 // -----------------------------------------------------------------------------
 
 TEST(TotalWavinessTest, SmallRange) {
-    EXPECT_EQ(Solution::totalWaviness(151, 152), 1 + 1);
+    EXPECT_EQ(WavinessCalculator::totalWaviness(151, 152), 1 + 1);
 }
 
 TEST(TotalWavinessTest, RangeContainingMixedValues) {
-    EXPECT_EQ(Solution::totalWaviness(149, 151), 0 + 1 + 1);
+    EXPECT_EQ(WavinessCalculator::totalWaviness(149, 151), 0 + 1 + 1);
 }
 
 // -----------------------------------------------------------------------------
@@ -122,7 +122,7 @@ TEST(TotalWavinessTest, UnsignedMaxSingleValue) {
     constexpr auto max = std::numeric_limits<T>::max();
 
     EXPECT_NO_THROW({
-        const auto result = Solution::totalWaviness(max, max);
+        const auto result = WavinessCalculator::totalWaviness(max, max);
         (void)result;
     });
 }
@@ -133,7 +133,7 @@ TEST(TotalWavinessTest, UnsignedRangeEndingAtMax) {
     constexpr auto max = std::numeric_limits<T>::max();
 
     EXPECT_NO_THROW({
-        const auto result = Solution::totalWaviness(max - 1, max);
+        const auto result = WavinessCalculator::totalWaviness(max - 1, max);
         (void)result;
     });
 }
@@ -144,7 +144,7 @@ TEST(TotalWavinessTest, SignedMaxSingleValue) {
     constexpr auto max = std::numeric_limits<T>::max();
 
     EXPECT_NO_THROW({
-        const auto result = Solution::totalWaviness(max, max);
+        const auto result = WavinessCalculator::totalWaviness(max, max);
         (void)result;
     });
 }
@@ -153,7 +153,7 @@ TEST(TotalWavinessTest, SignedMaxSingleValue) {
 // constexpr checks
 // -----------------------------------------------------------------------------
 
-static_assert(Solution::totalWaviness(152, 152) == 1);
-static_assert(Solution::totalWaviness(131, 131) == 1);
-static_assert(Solution::totalWaviness(12345, 12345) == 0);
-static_assert(Solution::totalWaviness(15151, 15151) == 3);
+static_assert(WavinessCalculator::totalWaviness(152, 152) == 1);
+static_assert(WavinessCalculator::totalWaviness(131, 131) == 1);
+static_assert(WavinessCalculator::totalWaviness(12345, 12345) == 0);
+static_assert(WavinessCalculator::totalWaviness(15151, 15151) == 3);
